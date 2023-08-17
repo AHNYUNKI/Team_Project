@@ -27,10 +27,6 @@ public class Order extends BaseTime {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery_id")
-    private Delivery delivery;
-
     private int count;
 
 }
