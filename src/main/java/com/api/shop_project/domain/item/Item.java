@@ -37,7 +37,7 @@ public abstract class Item {
     @Enumerated(value = EnumType.STRING)
     private Filters filters;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "item")

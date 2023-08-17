@@ -5,6 +5,7 @@ import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.domain.post.Post;
+import com.api.shop_project.domain.post.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,18 +46,23 @@ public class Member extends BaseTime {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Reply> replies = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
+
+
 
 
 }
