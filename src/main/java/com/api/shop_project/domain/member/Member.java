@@ -4,11 +4,11 @@ import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.Order;
+import com.api.shop_project.domain.post.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,13 +37,16 @@ public class Member extends BaseTime {
     private String name;
 
 
-    @Column(nullable = false)
     private String phone;
 
     @Embedded
     private Address address;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
