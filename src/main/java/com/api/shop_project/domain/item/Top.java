@@ -1,17 +1,19 @@
 package com.api.shop_project.domain.item;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @DiscriminatorValue("top")
 @Getter
-@Setter
 public class Top extends Item{
 
-    private String size;
+    private String top_Size;
 
 }

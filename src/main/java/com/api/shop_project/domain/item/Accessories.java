@@ -1,13 +1,15 @@
 package com.api.shop_project.domain.item;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
+@SuperBuilder
 @DiscriminatorValue("accessories")
-@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Accessories extends Item{
 
     @Enumerated(value = EnumType.STRING)

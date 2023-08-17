@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,11 +15,12 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder
 @Getter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "item_type")
 @Entity
-public abstract class Item extends BaseTime {
+public abstract class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -33,7 +35,7 @@ public abstract class Item extends BaseTime {
     private int stockQuantity;  // 재고수량
 
     @Enumerated(value = EnumType.STRING)
-    private Gender gender;
+    private Filters filters;
 
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
