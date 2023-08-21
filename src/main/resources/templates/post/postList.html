@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+</head>
+<body>
+<div class="container">
+    <div class="postList">
+        <div class="postList-con">
+            <h1>공지사항</h1>
+
+            <table>
+            <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성시간</th>
+            </tr>
+                <tr th:each="post : ${postList}">
+                <td th:text="${post.id}"></td>
+                <td th:text="${post.title}"></td>
+<!--                <td th:text="${post.content}"></td>-->
+                <td th:text="${post.writer}"></td>
+                <td th:text="${post.createTime}"></td>
+                    <td>
+                        <a th:href="@{/post/postDetail/{id}(id=${post.id})}">글보기</a> <!-- 수정 페이지 이동 -->
+                    </td>
+                </tr>
+
+                <form th:action="@{/post/postInsert}" method="get">
+
+                    <input type="submit" value="글작성" >
+                </form>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

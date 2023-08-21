@@ -3,6 +3,7 @@ package com.api.shop_project.domain.order;
 import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.member.Member;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;

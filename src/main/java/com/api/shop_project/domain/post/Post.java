@@ -1,10 +1,9 @@
 package com.api.shop_project.domain.post;
 
+import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.member.Member;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,16 +14,20 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Post {
+@Table(name = "posts")
+public class Post extends BaseTime {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String content;
 
+    @Column(nullable = false)
     private String writer;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,4 +36,6 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Reply> replies = new ArrayList<>();
+
+
 }
