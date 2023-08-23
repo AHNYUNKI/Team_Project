@@ -7,6 +7,7 @@ import com.api.shop_project.domain.order.OrderItem;
 import com.api.shop_project.domain.order.OrderStatus;
 import com.api.shop_project.dto.response.order.OrderFindOne;
 import com.api.shop_project.dto.response.order.OrderSearch;
+import com.api.shop_project.exception.ValueException;
 import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.order.OrderItemRepository;
@@ -35,14 +36,10 @@ public class OrderService {
     public Long order(Long memberId, Long itemId, int count) {
 
         // 회원 id로 회원 정보 가져왔다.
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> {
-            throw  new IllegalArgumentException("회원을 찾을 수 없습니다.");
-        });
+        Member member = memberRepository.findById(memberId).orElseThrow(ValueException::new);
 
         // 상품 id로 상품 정보를 가져왔다.
-        Item item = itemRepository.findById(itemId).orElseThrow(() -> {
-            throw new IllegalArgumentException("상품을 찾을 수 없습니다.");
-        });
+        Item item = itemRepository.findById(itemId).orElseThrow(ValueException::new);
 
         // 주문생성
         Order order = orderRepository.save(Order.builder()
@@ -65,9 +62,7 @@ public class OrderService {
     @Transactional
     public void cancel(Long orderId) {
 
-        Order orderGet = orderRepository.findById(orderId).orElseThrow(() -> {
-            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
-        });
+        Order orderGet = orderRepository.findById(orderId).orElseThrow(ValueException::new);
 
         OrderItem orderItem = orderItemRepository.findByOrder(orderGet);
 

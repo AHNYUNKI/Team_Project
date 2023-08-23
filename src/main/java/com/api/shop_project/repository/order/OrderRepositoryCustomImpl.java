@@ -6,6 +6,7 @@ import com.api.shop_project.domain.order.OrderStatus;
 import com.api.shop_project.domain.order.QOrder;
 import com.api.shop_project.dto.response.order.OrderFindOne;
 import com.api.shop_project.dto.response.order.OrderSearch;
+import com.api.shop_project.exception.ValueException;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
 
     private BooleanExpression idLike(Long memberId) {
         if (memberId == null) {
-            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
+            throw new ValueException();
         }
         return member.id.ne(memberId);
 
