@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="header" th:fragment="headerFragment">
+    <div class="header-con">
+        <div class="top-header">
+            <ul>
+                <li><a th:href="@{/}">회원가입</a></li>
+                <li><a th:href="@{/}">로그인</a></li>
+                <li><a th:href="@{/}">고객센터</a></li>
+            </ul>
+        </div>
+
+        <div class="middle-header">
+            <div class="left">
+                <ul>
+                    <li><a th:href="@{/}"><img th:src="@{/}" alt="logo">LOgo</a></li>
+                    <li><a th:href="@{/}">마켓컬리</a></li>
+                    <li><a th:href="@{/}">뷰티컬리</a></li>
+                </ul>
+            </div>
+
+            <div class="middle">
+                <form th:action="@{/}" method="post">
+                    <input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
+                    <input type="button" value="검색">
+                </form>
+            </div>
+
+            <div class="right">
+                <ul>
+                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">지도</a></li>
+                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">검색</a></li>
+                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">장바구니</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="bottom-header">
+            <div class="bottom-left">
+                <ul>
+                    <li><a th:href="@{/list}"><img th:src="@{/}" alt="category"></a></li>
+                    <li><a th:href="@{/list}">카테고리</a></li>
+                </ul>
+            </div>
+
+            <div class="bottom-middle">
+                <ul>
+                    <li><a th:href="@{/}">신상품</a></li>
+                    <li><a th:href="@{/}">베스트</a></li>
+                    <li><a th:href="@{/}">알뜰쇼핑</a></li>
+                    <li><a th:href="@{/}">특가/혜택</a></li>
+                </ul>
+            </div>
+
+            <div class="bottom-right">
+                <ul>
+                    <li><a th:href="@{/}"><img th:src="@{/}" alt="totqufqothd"></a></li>
+                </ul>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+</html>
