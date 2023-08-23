@@ -1,10 +1,10 @@
 package com.api.shop_project.domain.item;
 
-import com.api.shop_project.domain.BaseTime;
-import com.api.shop_project.domain.Cart;
+import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.Review;
+import com.api.shop_project.domain.order.OrderItem;
+import com.api.shop_project.exception.NotStockException;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -40,6 +40,33 @@ public abstract class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
-    private List<Cart> carts = new ArrayList<>();
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems = new ArrayList<>();
+
+    /**
+     * 재고 증가
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * 재고 감소
+     */
+    public void removeStock(int quantity) {
+
+        System.out.println("quantity => " + quantity);
+
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotStockException("품절 되었습니다.");
+        }
+
+        this.stockQuantity = restStock;
+
+    }
+
 }
