@@ -7,17 +7,17 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/project01
     username: root
-    password:
+    password: 1234
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create # DDL?? ??
+      ddl-auto: update # DDL?? ??
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
   # 테스트시 에러나서 일단 임시로 막아둠
-  thymeleaf:
-    check-template-location: false
+#  thymeleaf:
+#    check-template-location: true
