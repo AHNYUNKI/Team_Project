@@ -14,5 +14,6 @@ spring:
         show_sql: true
         format_sql: true
 
+  # 테스트시 에러나서 일단 임시로 막아둠
   thymeleaf:
     check-template-location: false
