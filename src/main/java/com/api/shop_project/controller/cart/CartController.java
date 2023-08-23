@@ -1,6 +1,7 @@
 package com.api.shop_project.controller.cart;
 
 import com.api.shop_project.domain.cart.Cart;
+import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.service.cart.CartService;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,17 @@ public class CartController {
     @GetMapping("/carts/{memberId}")
     public void cartList(@PathVariable("memberId") Long memberId, Model model) {
 
-        List<Cart> carts = cartService.cartFindOne(memberId);
+        List<CartItem> carts = cartService.cartFindOne(memberId);
 
         model.addAttribute("carts", carts);
 
 //        return "/";
+    }
+
+    @PostMapping("/carts/{itemId}")
+    public void cartCancel(@PathVariable("itemId") Long itemId) {
+
+        cartService.cartCancel(itemId);
+
     }
 }

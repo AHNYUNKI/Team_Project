@@ -1,10 +1,12 @@
 package com.api.shop_project.service.cart;
 
 import com.api.shop_project.domain.cart.Cart;
+import com.api.shop_project.domain.item.Bottom;
 import com.api.shop_project.domain.item.Filters;
 import com.api.shop_project.domain.item.Top;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
+import com.api.shop_project.dto.response.cart.CartList;
 import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -44,6 +46,15 @@ class CartServiceTest {
 
         Long itemId = itemRepository.save(top).getId();
 
+        Bottom bottom = Bottom.builder()
+                .filters(Filters.WOMEN)
+                .name("옷2")
+                .price(10000)
+                .stockQuantity(10)
+                .bottom_Size("100")
+                .build();
+
+        Long itemId2 = itemRepository.save(bottom).getId();
 
         Member member = Member.builder()
                 .email("user@gmail.com")
@@ -62,54 +73,40 @@ class CartServiceTest {
 
         cartService.addCart(memberId, itemId, top.getStockQuantity(), total);
 
+        cartService.addCart(memberId, itemId2, top.getStockQuantity(), total);
+
         // then
     }
 
     @Test
-    @DisplayName("장바구니 리스트")
-    public void test2() {
+    @DisplayName("장바구니 아이템 제거")
+    public void test2 () {
         // given
-//        Member member = Member.builder()
-//                .email("user@gmail.com")
-//                .name("user")
-//                .password("1111")
-//                .phone("010-1111-1111")
-//                .role(Role.USER)
-//                .build();
-//
-//        Long memberId = memberRepository.save(member).getId();
-//
-//        List<Item> itemList = IntStream.range(0, 10)
-//                .mapToObj(i -> Top.builder()
-//                        .filters(Filters.MAN)
-//                        .name("옷" + i)
-//                        .top_Size("95")
-//                        .stockQuantity(5)
-//                        .price(10000)
-//                        .build())
-//                .collect(Collectors.toList());
-//
-//        List<Item> itemList1 = itemRepository.saveAll(itemList);
-//
-//        cartService.addCart(memberId, itemList1.get(1).getId(), itemList1.get(1).getStockQuantity(), 100);
-//        cartService.addCart(memberId, itemList1.get(2).getId(), itemList1.get(2).getStockQuantity(), 100);
-//        cartService.addCart(memberId, itemList1.get(3).getId(), itemList1.get(3).getStockQuantity(), 1100);
-//        cartService.addCart(memberId, itemList1.get(4).getId(), itemList1.get(4).getStockQuantity(), 100);
+        Top top = Top.builder()
+                .filters(Filters.MAN)
+                .name("옷1")
+                .price(10000)
+                .stockQuantity(10)
+                .top_Size("95")
+                .build();
 
-//        // when
-//        List<CartList> all = cartService.findALL(memberId);
-//
-//        // then
-//        for (CartList carts : all ) {
-//            System.out.println("장바구니 =>" + carts.getCartItems());
-//        }
+        Long itemId = itemRepository.save(top).getId();
 
-        List<Cart> all = cartService.cartFindOne(1L);
+        Member member = Member.builder()
+                .email("user@gmail.com")
+                .name("user")
+                .password("1111")
+                .phone("010-1111-1111")
+                .role(Role.USER)
+                .build();
 
-        for (Cart cart : all) {
-            System.out.println(cart.getCartItems());
-        }
+        Long memberId = memberRepository.save(member).getId();
+        // when
+        cartService.addCart(memberId, itemId, top.getStockQuantity(), 10000);
 
+        cartService.cartCancel(itemId);
+
+        // then
     }
 
 }

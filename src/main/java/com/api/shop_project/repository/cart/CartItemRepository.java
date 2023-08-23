@@ -5,7 +5,11 @@ import com.api.shop_project.domain.cart.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     CartItem findByCart(Cart cartGet);
+
+    Optional<CartItem> findByItemId(Long itemId);
 }
