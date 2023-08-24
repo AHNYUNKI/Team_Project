@@ -22,15 +22,15 @@
             <div class="middle">
                 <form th:action="@{/}" method="post">
                     <input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
-                    <input type="button" value="검색">
+                    <button type="submit" name="search_btn" id="search_btn"><img th:src="@{/images/search.png}" alt="검색"></button>
                 </form>
             </div>
 
             <div class="right">
                 <ul>
-                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">지도</a></li>
-                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">검색</a></li>
-                    <li><a th:href="@{/}"><img th:src="@{/}" alt="">장바구니</a></li>
+                    <li><a th:href="@{/}"><img th:src="@{/images/location.png}" alt="지도"></a></li>
+                    <li><a th:href="@{/}"><img th:src="@{/images/search.png}" alt="검색"></a></li>
+                    <li><a th:href="@{/}"><img th:src="@{/images/cart.png}" alt="장바구니"></a></li>
                 </ul>
             </div>
 
@@ -38,10 +38,7 @@
 
         <div class="bottom-header">
             <div class="bottom-left">
-                <ul>
-                    <li><a th:href="@{/list}"><img th:src="@{/}" alt="category"></a></li>
-                    <li><a th:href="@{/list}">카테고리</a></li>
-                </ul>
+                <span><img th:src="@{/images/categoryList.png}" alt="카테고리아이콘">카테고리</span>
             </div>
 
             <div class="bottom-middle">
@@ -54,9 +51,12 @@
             </div>
 
             <div class="bottom-right">
-                <ul>
-                    <li><a th:href="@{/}"><img th:src="@{/}" alt="totqufqothd"></a></li>
-                </ul>
+                <a th:href="@{/}">
+                    <div class="inner">
+                        <span>샛별・택배 </span>
+                        <span>배송안내</span>
+                    </div>
+                </a>
             </div>
 
 
