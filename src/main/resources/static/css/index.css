@@ -1,3 +1,38 @@
 @import url(/css/common/reset.css);
 @import url(/css/common/header.css);
 @import url(/css/common/footer.css);
+
+.container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.container .sections-con{
+    display: flex;
+    justify-content: center;
+    border:1px solid;
+    box-sizing:border-box;
+}
+
+.container .sections-con .sections{
+    flex-basis: 1600px;
+}
+
+.container .sections-con .sections .section1{
+    flex-basis:1600px;
+    background: url(/images/sec1Bg_0.jpg) no-repeat 50%/cover;
+    display: flex;
+    justify-content: center;
+    border:1px solid;
+    box-sizing:border-box;
+}
+
+.container .sections-con .sections .section2{
+    flex-basis:1200px;
+    display: flex;
+    justify-content: center;
+    border:1px solid;
+    box-sizing:border-box;
+}

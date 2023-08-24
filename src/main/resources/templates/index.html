@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/kurlylayout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/kurlylayout}">
 
 
 <th:block layout:fragment="title">
@@ -13,11 +12,35 @@
 </th:block>
 
 <th:block layout:fragment="script">
-<!--    <script th:src="@{/}"></script>-->
+    <!--    <script th:src="@{/}"></script>-->
 </th:block>
 
 <th:block layout:fragment="container">
+    <div class="container">
+        <div class="sections-con">
+            <div class="sections">
 
+                <!-- =========================================== -->
+
+                <div class="section1">
+                    <ul>
+                        <li>AutoGallery</li>
+                    </ul>
+                </div>
+
+                <!-- =========================================== -->
+
+                <div class="section2">
+                    <p>Section2</p>
+                </div>
+
+                <!-- =========================================== -->
+
+
+
+            </div>
+        </div>
+    </div>
 </th:block>
 
 </html>
