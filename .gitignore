@@ -38,5 +38,5 @@ out/
 
 
 application.yml
-static
-templates
+static/
+templates/
