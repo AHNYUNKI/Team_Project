@@ -32,4 +32,7 @@ public class Review extends BaseTime {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    public void edit(String content) {
+        this.content = content;
+    }
 }
