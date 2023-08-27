@@ -2,8 +2,8 @@ package com.api.shop_project.domain.post;
 
 import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.member.Member;
+import com.api.shop_project.dto.post.PostVo;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "posts")
 public class Post extends BaseTime {
@@ -38,4 +39,10 @@ public class Post extends BaseTime {
     private List<Reply> replies = new ArrayList<>();
 
 
+
 }
+
+
+
+
+

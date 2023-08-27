@@ -21,23 +21,30 @@
                         </li>
                         <li>
                             <label th:for="title">title</label>
-                            <input type="text" id="title" name="title" th:value="${post.title}">
+                            <input type="text" id="title" name="title" th:value="${post.title}" readonly>
                         </li>
                         <li>
                             <label th:for="content">content</label>
-                            <input type="text" id="content" name="content" th:value="${post.content}">
+                            <input type="text" id="content" name="content" th:value="${post.content}" readonly>
                         </li>
                         <li>
                             <label th:for="writer">writer</label>
                             <input type="text" id="writer" name="writer" th:value="${post.writer}" readonly>
                         </li>
                         <li>
-                            <label th:for="createTime">createTime</label>
-                            <input type="text" id="createTime" name="createTime" th:value="${post.createTime}" readonly>
+                            <label for="createTime">createTime</label>
+                            <label th:if="${post.createTime} == null" th:for="updateTime">
+                            <input type="text" id="updateTime" name="updateTime" th:value="${post.upDateTime}" readonly>
+                            </label>
+
+                            <label th:unless="${post.createTime} == null" th:for="createTime">
+                                <input type="text" id="createTime" name="createTime" th:value="${post.createTime}" readonly>
+                            </label>
+
                         </li>
                         <li>
-                            <a th:href="@{#}">삭제</a>
-                            <a th:href="@{/post/}" id="updateBtn">수정</a>
+                            <a th:href="@{/post/postDelete/{id}(id=${post.id})}">삭제</a>
+                            <a th:href="@{/post/postUpdate/{id}(id=${post.id})}">수정</a>
                             <a th:href="@{#}">목록</a>
                         </li>
                     </ul>
