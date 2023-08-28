@@ -1,18 +1,15 @@
 package com.api.shop_project.domain.item;
 
-<<<<<<< HEAD
 import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-=======
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.OrderItem;
 import com.api.shop_project.exception.NotEnoughStockException;
 import lombok.AllArgsConstructor;
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -48,10 +45,8 @@ public abstract class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-<<<<<<< HEAD
     @OneToMany(mappedBy = "item")
     private List<Cart> carts = new ArrayList<>();
-=======
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -81,5 +76,4 @@ public abstract class Item {
 
     }
 
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 }

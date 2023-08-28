@@ -1,10 +1,6 @@
 server:
-<<<<<<< HEAD
-  port: 8095
-=======
   port: 8085
 
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 spring:
   datasource:
@@ -22,7 +18,6 @@ spring:
         show_sql: true
         format_sql: true
 
-<<<<<<< HEAD
   thymeleaf:
     prefix: classpath:templates/
     suffix: .html
@@ -31,8 +26,6 @@ spring:
     #    prefix: classpath:/templates/
     #    suffix: .html
 #    enabled: true
-=======
   # 테스트시 에러나서 일단 임시로 막아둠
 #  thymeleaf:
 #    check-template-location: true
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
