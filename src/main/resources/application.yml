@@ -1,6 +1,5 @@
 server:
-  port: 8085
-
+  port: 8095
 
 spring:
   datasource:
@@ -19,5 +18,8 @@ spring:
         format_sql: true
 
   # 테스트시 에러나서 일단 임시로 막아둠
-#  thymeleaf:
-#    check-template-location: true
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
