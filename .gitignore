@@ -8,6 +8,8 @@ build/
 ### oauth2.0 ###
 application-oauth2.yml
 
+application.yml
+
 ### STS ###
 .apt_generated
 .classpath
