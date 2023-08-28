@@ -10,32 +10,114 @@
         <div class="postList-con">
             <h1>공지사항</h1>
 
+            <div class="search">
+                <form th:action="@{/post/postSearch}" method="get">
+                    <select name="subject" id="subject">
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
+                        <option value="writer">작성자</option>
+                    </select>
+                    <input type="text" name="search" id="search" th:value="${param.search}">
+                    <input type="submit" value="검색">
+                </form>
+            </div>
+
             <table>
-            <tr>
-                <th>ID</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성시간</th>
-            </tr>
-                <tr th:each="post : ${postList}">
-                <td th:text="${post.id}"></td>
-                <td th:text="${post.title}"></td>
-<!--                <td th:text="${post.content}"></td>-->
-                <td th:text="${post.writer}"></td>
-                <td th:text="${post.createTime}"></td>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성시간</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="post : ${postVo}">
+                    <td th:text="${post.id}"></td>
+                    <td th:text="${post.title}"></td>
+                    <!--                <td th:text="${post.content}"></td>-->
+                    <td th:text="${post.writer}"></td>
+
+                    <!-- 글 수정하면 updateTime이 보이게 하기 -->
+                    <td th:if="${post.createTime} == null" th:text="${post.upDateTime}"></td>
+                    <td th:unless="${post.createTime} == null" th:text="${post.createTime}"></td>
+
                     <td>
                         <a th:href="@{/post/postDetail/{id}(id=${post.id})}">글보기</a> <!-- 수정 페이지 이동 -->
                     </td>
                 </tr>
 
-                <form th:action="@{/post/postInsert}" method="get">
-
-                    <input type="submit" value="글작성" >
-                </form>
+                </tbody>
 
             </table>
+
+            <form th:action="@{/post/postInsert}" method="get">
+
+                <input type="submit" value="글작성">
+            </form>
+
+            <div class="paging">
+                <ul>
+                    <li>
+                        <!-- 현재페이지가 첫번째 페이지이면 span표시 -->
+                        <span th:if="${1==postVo.pageable.pageNumber+1}">START</span>
+                        <!-- 처음 페이지가 아니면 처음(누를시 1페이지로) -->
+                        <span th:unless="${1==postVo.pageable.pageNumber+1}">
+                            <a th:href="@{/post/postList(page=0)}">처음</a>
+                        </span>
+                    </li>
+                    <li>
+                        <!-- 첫페이지 일때 -->
+                        <span th:if="${1==postVo.pageable.pageNumber+1}">Pre</span>
+                        <span th:unless="${1==postVo.pageable.pageNumber+1}">
+                            <a th:href="@{/post/postList(page=${postVo.pageable.pageNumber-1})}">이전</a>
+                        </span>
+                    </li>
+
+                    <li>
+
+                        <li th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                        <span th:if="${i == postVo.pageable.pageNumber+1}" th:text="${i}"></span>
+
+                    <a th:unless="${i == postVo.pageable.pageNumber+1}"
+                        th:href="@{/post/postList(page=${i - 1})}" th:text="${i}"></a>
+                </li>
+                    </li>
+
+                    <li>
+                        <span th:if="${postVo.totalPages == postVo.pageable.pageNumber + 1}">NEXT</span>
+
+                        <span th:unless="${postVo.totalPages == postVo.pageable.pageNumber + 1}">
+                            <a th:href="@{/post/postList(page=${postVo.pageable.pageNumber + 1})}">다음</a>
+                        </span>
+                    </li>
+
+
+                    <li>
+                        <span th:if="${postVo.totalPages == postVo.pageable.pageNumber + 1}">END</span>
+
+                        <span th:unless="${postVo.totalPages == postVo.pageable.pageNumber+1}">
+                            <a th:href="@{/post/postList(page=${postVo.totalPages}-1)}">마지막</a>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
