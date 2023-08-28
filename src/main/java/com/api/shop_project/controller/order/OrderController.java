@@ -1,9 +1,7 @@
 package com.api.shop_project.controller.order;
 
-<<<<<<< HEAD
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-=======
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.dto.response.order.OrderSearch;
 import com.api.shop_project.service.order.OrderService;
@@ -13,15 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
 
-<<<<<<< HEAD
 //    private final OrderService orderService;
-=======
     private final OrderService orderService;
 
     /**
@@ -72,6 +67,5 @@ public class OrderController {
         return "index";
     }
 
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 }

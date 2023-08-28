@@ -1,28 +1,21 @@
 package com.api.shop_project.domain.order;
 
 import com.api.shop_project.domain.item.Item;
-<<<<<<< HEAD
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-=======
+
 import lombok.*;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 
+
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 @Entity
 public class OrderItem {
 
@@ -44,8 +37,6 @@ public class OrderItem {
     @Column(nullable = false)
     private int count;
 
-<<<<<<< HEAD
-=======
     @Builder
     public OrderItem(Long id, Item item,Order order , int price, int count) {
         this.id = id;
@@ -73,5 +64,4 @@ public class OrderItem {
 
         item.addStock(count);
     }
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 }

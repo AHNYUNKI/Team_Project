@@ -1,4 +1,4 @@
-package com.api.shop_project;
+package com.api.shop_project.service.post;
 
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.repository.post.PostRepository;
