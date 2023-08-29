@@ -2,6 +2,10 @@
 @import url(/css/common/header.css);
 @import url(/css/common/footer.css);
 
+*{
+    box-sizing: border-box;
+}
+
 .container{
     width: 100%;
     height: auto;
@@ -36,18 +40,32 @@
 }
 
 .container .sections-con .sections .section1-con .section1 .slideshow-container{
-    width: 100%;
+    max-width: 1800px;
     position: relative;
+    margin: auto;
 }
 
-.container .sections-con .sections .section1-con .section1 .slideshow-container img{
+.container .sections-con .sections .section1-con .section1 .slideshow-container .text{
+    color: #000000;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.container .sections-con .sections .section1-con .section1 .slideshow-container>img{
     vertical-align: middle;
 }
 
-.slides{
+.mySlides{
     display: none;
 }
-.container .sections-con .sections .section1-con .section1 .slideshow-container .numbertext{
+img{vertical-align: middle;}
+
+
+.container .sections-con .sections .section1-con .section1 .slideshow-container .mySlides.fade .numbertext{
     color: black;
     font-size: 14px;
     padding: 8px 12px;
@@ -55,7 +73,7 @@
     top: 0;
 }
 
-.container .sections-con .sections .section1-con .section1 .slideshow-container .dot{
+.container .sections-con .sections .section1-con .section1 .dot{
     height: 15px;
     width: 15px;
     margin: 0 2px;
@@ -75,7 +93,7 @@
     animation-name: fade;
     animation-duration: 1.5s;
 }
-/* @-webkit-keyframes fade {
+@-webkit-keyframes fade {
     from {opacity: .4} 
     to {opacity: 1}
   }
@@ -83,7 +101,11 @@
  @keyframes fade {
     from {opacity: .4} 
     to {opacity: 1}
- } */
+ }
+ @media only screen and(max-width:1200px){
+    .text{font-size: 11px}
+ }
+
 
 
 
