@@ -6,7 +6,6 @@ queryDslVersion = "5.0.0"
 }
 
 
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.14'
@@ -34,7 +33,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-<<<<<<< HEAD
 //	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
