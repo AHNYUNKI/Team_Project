@@ -1,7 +1,11 @@
 package com.api.shop_project.domain.member;
 
 import com.api.shop_project.domain.BaseTime;
+<<<<<<< HEAD
 import com.api.shop_project.domain.Cart;
+=======
+import com.api.shop_project.domain.cart.Cart;
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.domain.post.Post;
@@ -10,7 +14,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+<<<<<<< HEAD
 import lombok.experimental.SuperBuilder;
+=======
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -59,9 +66,15 @@ public class Member extends BaseTime {
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
+<<<<<<< HEAD
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
     private Cart cart;
+=======
+
+//    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY, orphanRemoval = true)
+//    private Cart cart;
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 
 

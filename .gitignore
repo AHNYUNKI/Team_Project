@@ -5,6 +5,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+<<<<<<< HEAD
+=======
+### oauth2.0 ###
+application-oauth2.yml
+
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 ### STS ###
 .apt_generated
 .classpath
@@ -30,11 +36,16 @@ out/
 /nbproject/private/
 /nbbuild/
 /dist/
+<<<<<<< HEAD
 /nbdist/git
+=======
+/nbdist/
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 /.nb-gradle/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 
 
 application.yml
@@ -45,3 +56,5 @@ templates
 static/
 templates/
 >>>>>>> 31ddcbee58fcc7617d8995c233efe3d1885eec45
+=======
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1

@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+<<<<<<< HEAD
 import lombok.experimental.SuperBuilder;
+=======
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 
 import javax.persistence.*;
 
@@ -33,4 +36,10 @@ public class Review extends BaseTime {
     @JoinColumn(name = "item_id")
     private Item item;
 
+<<<<<<< HEAD
+=======
+    public void edit(String content) {
+        this.content = content;
+    }
+>>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
 }
