@@ -87,7 +87,7 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	querydsl.extendsFrom compileClasspath
->>>>>>> 5c8e7fb138c77e53f420c48b8749179e66abb5b1
+
 }
 
 tasks.named('test') {
