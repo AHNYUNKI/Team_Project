@@ -38,5 +38,10 @@ out/
 
 
 application.yml
+<<<<<<< HEAD
 static
 templates
+=======
+static/
+templates/
+>>>>>>> 31ddcbee58fcc7617d8995c233efe3d1885eec45
