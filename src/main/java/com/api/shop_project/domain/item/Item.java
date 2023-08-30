@@ -1,8 +1,8 @@
 package com.api.shop_project.domain.item;
 
 import com.api.shop_project.domain.BaseTime;
-import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
+import com.api.shop_project.domain.cart.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import com.api.shop_project.domain.cart.CartItem;
@@ -47,6 +47,7 @@ public abstract class Item {
 
     @OneToMany(mappedBy = "item")
     private List<Cart> carts = new ArrayList<>();
+
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 

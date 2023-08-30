@@ -12,6 +12,8 @@ class MemberServiceTest {
     @Autowired
     private MemberService memberService;
 
+
+
     @Test
     public void 회원_수정() {
 
