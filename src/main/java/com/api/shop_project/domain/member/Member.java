@@ -59,12 +59,4 @@ public class Member extends BaseTime {
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-
-
-
-
 }

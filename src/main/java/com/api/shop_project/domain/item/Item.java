@@ -27,7 +27,8 @@ import java.util.List;
 @Entity
 public abstract class Item {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
@@ -44,9 +45,6 @@ public abstract class Item {
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
-
-    @OneToMany(mappedBy = "item")
-    private List<Cart> carts = new ArrayList<>();
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -76,5 +74,4 @@ public abstract class Item {
         this.stockQuantity = restStock;
 
     }
-
 }
