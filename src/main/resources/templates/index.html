@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/kurlylayout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/kurlylayout}"
+>
 
 
 <th:block layout:fragment="title">
+    <title>index</title>
 </th:block>
 
 <th:block layout:fragment="css">
+<<<<<<< HEAD
     link
+=======
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+>>>>>>> 007b2fe08a7b0a0896c2c0e08989e312bfdcf4e0
 </th:block>
 
 <th:block layout:fragment="script">
+    <script th:src="@{/js/index.js}" defer ></script>
 </th:block>
 
 <!--<head>-->
