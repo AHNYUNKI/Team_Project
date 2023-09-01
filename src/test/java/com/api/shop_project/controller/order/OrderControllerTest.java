@@ -5,6 +5,8 @@ import com.api.shop_project.domain.item.Top;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.repository.Item.ItemRepository;
+import com.api.shop_project.repository.cart.CartItemRepository;
+import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.order.OrderItemRepository;
 import com.api.shop_project.repository.order.OrderRepository;
@@ -52,6 +54,12 @@ class OrderControllerTest {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
+
 
     @BeforeEach
     void clean() {
@@ -59,6 +67,8 @@ class OrderControllerTest {
         itemRepository.deleteAll();
         orderRepository.deleteAll();
         orderItemRepository.deleteAll();
+        cartRepository.deleteAll();
+        cartItemRepository.deleteAll();
     }
 
 

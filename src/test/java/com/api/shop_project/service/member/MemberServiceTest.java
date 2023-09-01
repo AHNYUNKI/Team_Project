@@ -2,6 +2,8 @@ package com.api.shop_project.service.member;
 
 import com.api.shop_project.domain.member.Address;
 import com.api.shop_project.dto.response.member.MemberDto;
+import com.api.shop_project.repository.member.MemberRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,12 @@ class MemberServiceTest {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private MemberRepository memberRepository;
+    @BeforeEach
+    void clean() {
+        memberRepository.deleteAll();
+    }
 
 
     @Test
