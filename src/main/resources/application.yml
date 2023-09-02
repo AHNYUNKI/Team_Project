@@ -1,6 +1,5 @@
 server:
-  port: 8085
-
+  port: 8095
 
 spring:
   datasource:
@@ -12,20 +11,31 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update # DDL?? ??
+      ddl-auto: update  #자동으로 테이블 생성
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
-  thymeleaf:
-    prefix: classpath:templates/
-    suffix: .html
-    cache: false
-    check-template-location: true
-    #    prefix: classpath:/templates/
-    #    suffix: .html
-#    enabled: true
-  # 테스트시 에러나서 일단 임시로 막아둠
-#  thymeleaf:
-#    check-template-location: true
+  #  thymeleaf:
+  #    prefix: classpath:templates/
+  #    suffix: .html
+  #    cache: false
+  #    check-template-location: true
+  #    #    prefix: classpath:/templates/
+  #    #    suffix: .html
+  #    enabled: true
+
+  #logging:
+  #  level:
+  #    org.hibernate.SQL: debug
+
+
+
+  # application-oauth2.yml
+  profiles:
+    include: oauth2
+
+
+
+

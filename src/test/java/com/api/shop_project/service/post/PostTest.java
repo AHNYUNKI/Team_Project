@@ -16,6 +16,7 @@ public class PostTest {
     @Autowired
     private PostRepository postRepository;
 
+
     // 공지글 List
     @Test
     void postListTest(){

@@ -41,7 +41,7 @@ public class PostService {
     }
 
     @Transactional
-    public void postInsertDo(PostVo postVo) throws IllegalAccessException {
+    public void postInsertDo(PostVo postVo) {
 
 //        Post post = Post.builder()
 //                .title(postVo.getTitle())
