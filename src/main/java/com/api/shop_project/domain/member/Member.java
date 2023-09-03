@@ -1,8 +1,8 @@
 package com.api.shop_project.domain.member;
 
 import com.api.shop_project.domain.BaseTime;
-import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
+import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.domain.post.Reply;
@@ -58,13 +58,5 @@ public class Member extends BaseTime {
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-
-
-
 
 }

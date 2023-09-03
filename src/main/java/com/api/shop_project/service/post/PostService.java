@@ -1,7 +1,8 @@
-package com.api.shop_project.repository.post;
+package com.api.shop_project.service.post;
 
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.dto.post.PostVo;
+import com.api.shop_project.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

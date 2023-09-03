@@ -19,6 +19,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
+
+
 //    @Transactional
 //    public void insertMember(String email, String password, String name) {
 //

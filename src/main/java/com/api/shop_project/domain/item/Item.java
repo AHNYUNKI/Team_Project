@@ -1,8 +1,8 @@
 package com.api.shop_project.domain.item;
 
 import com.api.shop_project.domain.BaseTime;
-import com.api.shop_project.domain.Cart;
 import com.api.shop_project.domain.Review;
+import com.api.shop_project.domain.cart.Cart;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import com.api.shop_project.domain.cart.CartItem;
@@ -27,7 +27,8 @@ import java.util.List;
 @Entity
 public abstract class Item {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
@@ -45,8 +46,6 @@ public abstract class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
-    private List<Cart> carts = new ArrayList<>();
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -75,5 +74,4 @@ public abstract class Item {
         this.stockQuantity = restStock;
 
     }
-
 }

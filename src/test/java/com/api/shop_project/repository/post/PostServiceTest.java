@@ -4,11 +4,16 @@ import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.dto.post.PostVo;
 import com.api.shop_project.repository.member.MemberRepository;
+import com.api.shop_project.service.post.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,6 +62,30 @@ class PostServiceTest {
         assertEquals("h1", post.getTitle());
         assertEquals("내용", post.getContent());
         assertEquals("a", post.getWriter());
+
+    }
+
+    @Test
+    @DisplayName("게시글 LIST")
+    public void test2(){
+
+
+        List<Post> post = IntStream.range(0, 9)
+                .mapToObj(i -> (Post.builder()
+                        .title("제목1"+i)
+                        .content("내용"+i)
+                        .writer("작성자"+i)
+                        .build()
+                )).collect(Collectors.toList());
+
+        postRepository.saveAll(post);
+
+        post.forEach(System.out::println);
+
+
+
+
+
 
     }
 
