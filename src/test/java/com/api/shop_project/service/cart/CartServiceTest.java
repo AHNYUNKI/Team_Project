@@ -8,6 +8,7 @@ import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.dto.response.cart.CartList;
 import com.api.shop_project.repository.Item.ItemRepository;
+import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,8 @@ class CartServiceTest {
 
     @Autowired
     private CartService cartService;
+
+
 
     @BeforeEach
     void clean() {

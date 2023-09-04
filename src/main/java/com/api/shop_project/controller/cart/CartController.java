@@ -3,6 +3,7 @@ package com.api.shop_project.controller.cart;
 import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.service.cart.CartService;
+import com.querydsl.core.Tuple;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,11 @@ public class CartController {
     @GetMapping("/carts/{memberId}")
     public void cartList(@PathVariable("memberId") Long memberId, Model model) {
 
-        List<CartItem> carts = cartService.cartFindOne(memberId);
+        /**
+         * carts 안에 member_id, item 이름, item 개수, item 가격이 담깁니다.
+         */
+
+        List<Tuple> carts = cartService.cartFindOne(memberId);
 
         model.addAttribute("carts", carts);
 
