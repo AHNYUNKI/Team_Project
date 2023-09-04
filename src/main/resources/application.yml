@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8095
 
 
 spring:
@@ -27,5 +27,10 @@ spring:
     #    suffix: .html
 #    enabled: true
   # 테스트시 에러나서 일단 임시로 막아둠
+
+  thymeleaf:
+    check-template-location: true
+
 #  thymeleaf:
 #    check-template-location: true
+
