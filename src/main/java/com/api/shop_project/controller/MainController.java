@@ -31,5 +31,16 @@ public class MainController {
         return "/item/insert";
     }
 
+    @GetMapping("/post")
+    public String post(){
+        return "/post/postList";
+    }
+
+    @GetMapping("/itemList")
+    public String itemList(){
+        return "/item/itemList";
+    }
+
+
 
 }
