@@ -1,9 +1,14 @@
 package com.api.shop_project.domain.item;
 
+import com.api.shop_project.domain.BaseTime;
+import com.api.shop_project.domain.Review;
+import com.api.shop_project.domain.cart.Cart;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.OrderItem;
-import com.api.shop_project.exception.NotStockException;
+import com.api.shop_project.exception.NotEnoughStockException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +27,8 @@ import java.util.List;
 @Entity
 public abstract class Item {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
@@ -62,11 +68,10 @@ public abstract class Item {
 
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {
-            throw new NotStockException("품절 되었습니다.");
+            throw new NotEnoughStockException("품절 되었습니다.");
         }
 
         this.stockQuantity = restStock;
 
     }
-
 }

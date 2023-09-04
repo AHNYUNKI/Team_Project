@@ -4,10 +4,8 @@ import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.item.Item;
 import com.api.shop_project.domain.member.Member;
-import com.api.shop_project.domain.order.Order;
-import com.api.shop_project.domain.order.OrderItem;
-import com.api.shop_project.domain.order.OrderStatus;
 import com.api.shop_project.dto.response.cart.CartFindOne;
+import com.api.shop_project.exception.ValueException;
 import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.cart.CartItemRepository;
 import com.api.shop_project.repository.cart.CartRepository;
@@ -31,13 +29,9 @@ public class CartService {
     @Transactional
     public void addCart(Long memberId, Long itemId, int count, int price) {
 
-        Member member = memberRepository.findById(memberId).orElseThrow(
-                () -> new IllegalArgumentException("회원을 찾을 수 없습니다.")
-        );
+        Member member = memberRepository.findById(memberId).orElseThrow(ValueException::new);
 
-        Item item = itemRepository.findById(itemId).orElseThrow(
-                () -> new IllegalArgumentException("상품을 찾을 수 없습니다.")
-        );
+        Item item = itemRepository.findById(itemId).orElseThrow(ValueException::new);
 
         Cart cart = cartRepository.save(Cart.builder()
                 .member(member)
@@ -51,7 +45,7 @@ public class CartService {
                 .build());
     }
 
-    public List<Cart> cartFindOne(Long memberId) {
+    public List<CartItem> cartFindOne(Long memberId) {
 
         CartFindOne cartFindOne = new CartFindOne();
 
@@ -62,16 +56,12 @@ public class CartService {
 
     }
 
-    public void deleteCart(Long cartId) {
+    @Transactional
+    public void cartCancel(Long itemId) {
 
-        Cart cartGet = cartRepository.findById(cartId).orElseThrow(() -> {
-            throw new IllegalArgumentException("회원을 찾을 수 없습니다.");
-        });
-
-        CartItem cartItem = cartItemRepository.findByCart(cartGet);
+        CartItem cartItem = cartItemRepository.findByItemId(itemId).orElseThrow(ValueException::new);
 
         cartItemRepository.delete(cartItem);
 
     }
-
 }
