@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/kurlylayout}"
+>
 
-</body>
+
+<th:block layout:fragment="title">
+    <title>index</title>
+</th:block>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/index.js}" defer ></script>
+</th:block>
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>index페이지</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/index.css}">-->
+<!--    <script th:src="@{/js/index.js}" defer></script>-->
+<!--</head>-->
+
+
+<th:block layout:fragment="container">
+    <div class="container">
+        <div class="sections-con">
+            <div class="sections">
+                <!-- =========================================== -->
+                <div class="section1-con">
+                    <div class="section1">
+                        <div class="slideshow-container">
+                            <div class="slides fade">
+                                <div class="numbertext">1/3</div>
+                                <img th:src="@{http://placehold.it/1800x600}" style="width:100%">
+                            </div>
+
+                            <div class="slides fade">
+                                <div class="numbertext">2/3</div>
+                                <img th:src="@{http://placehold.it/1800x600}" style="width:100%">
+                            </div>
+
+                            <div class="slides fade">
+                                <div class="numbertext">3/3</div>
+                                <img th:src="@{http://placehold.it/1800x600}" style="width:100%">
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div style="text-align:center">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- =========================================== -->
+                <div class="section2-con">
+                    <div class="section2">
+                        <p>Section2</p>
+                    </div>
+                </div>
+                <!-- =========================================== -->
+
+
+            </div>
+        </div>
+    </div>
+</th:block>
+
 </html>

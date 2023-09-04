@@ -1,5 +1,7 @@
 package com.api.shop_project.controller.order;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.dto.response.order.OrderSearch;
 import com.api.shop_project.service.order.OrderService;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
+//    private final OrderService orderService;
     private final OrderService orderService;
 
     /**

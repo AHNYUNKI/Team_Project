@@ -1,3 +1,7 @@
+server:
+  port: 8095
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,4 +19,18 @@ spring:
         format_sql: true
 
   thymeleaf:
-    check-template-location: false
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+    #    prefix: classpath:/templates/
+    #    suffix: .html
+#    enabled: true
+  # 테스트시 에러나서 일단 임시로 막아둠
+
+  thymeleaf:
+    check-template-location: true
+
+#  thymeleaf:
+#    check-template-location: true
+

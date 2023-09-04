@@ -35,4 +35,5 @@ public class CartItem {
         this.count = count;
         this.totalPrice = totalPrice;
     }
+
 }

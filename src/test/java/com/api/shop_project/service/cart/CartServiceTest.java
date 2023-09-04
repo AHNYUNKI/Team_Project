@@ -10,6 +10,7 @@ import com.api.shop_project.dto.response.cart.CartList;
 import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,16 @@ class CartServiceTest {
 
     @Autowired
     private CartService cartService;
+
+
+
+    @BeforeEach
+    void clean() {
+        memberRepository.deleteAll();
+        itemRepository.deleteAll();
+
+    }
+
 
     @Test
     @DisplayName("물건 담기")

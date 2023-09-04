@@ -1,11 +1,18 @@
 package com.api.shop_project.domain.order;
 
 import com.api.shop_project.domain.item.Item;
+
+import javax.persistence.*;
+
+
 import lombok.*;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 
+
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
