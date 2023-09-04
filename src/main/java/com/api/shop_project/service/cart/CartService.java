@@ -10,6 +10,7 @@ import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.cart.CartItemRepository;
 import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
+import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,7 @@ public class CartService {
                 .build());
     }
 
-    public List<CartItem> cartFindOne(Long memberId) {
+    public List<Tuple> cartFindOne(Long memberId) {
 
         CartFindOne cartFindOne = new CartFindOne();
 
