@@ -14,7 +14,7 @@ package com.api.shop_project.controller.post;
 //import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.api.shop_project.dto.post.PostVo;
-import com.api.shop_project.repository.post.PostService;
+import com.api.shop_project.service.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
