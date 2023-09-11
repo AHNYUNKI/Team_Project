@@ -2,6 +2,7 @@ package com.api.shop_project.service.post;
 
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.dto.response.post.PostSave;
+import com.api.shop_project.exception.PostNotFound;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class PostService {
 
 
         Post post =
-                postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+                postRepository.findById(id).orElseThrow(PostNotFound::new);
 
         return PostSave.builder()
                 .id(post.getId())
@@ -102,19 +103,9 @@ public class PostService {
         Long postId = postRepository.save(post).getId();
 
 
-        Optional<Post> optionalPost =
-                Optional.ofNullable(postRepository.findById(postId).orElseThrow(() -> {
-                    return new IllegalArgumentException("수정 아이디가 없습니다.");
-                }));
+        postRepository.findById(postId).orElseThrow(PostNotFound::new);
 
-        if (optionalPost.isPresent()) {
-
-            return 1;
-        }
-
-        System.out.println("안됐다!");
-
-        return 0;
+        return 1;
 
 
     }
@@ -122,7 +113,7 @@ public class PostService {
     public PostSave postUpdate(Long id) {
 
         Post post =
-                postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+                postRepository.findById(id).orElseThrow(PostNotFound::new);
 
 
         return PostSave.builder()
@@ -137,6 +128,8 @@ public class PostService {
     }
 
     public void postDelete(Long id) {
+
+        postRepository.findById(id).orElseThrow(PostNotFound::new);
 
         postRepository.deleteById(id);
 

@@ -99,7 +99,10 @@ public class PostController {
         PostSave postSave = postService.postDetail(id);
         model.addAttribute("post", postSave);
         List<ReplySave> replyList = replyService.replyList(postSave.getId());
-        model.addAttribute("replyList", replyList);
+
+        if(!replyList.isEmpty()) {
+            model.addAttribute("replyList", replyList);
+        }
 
 
 //        return "post/postDetail";
