@@ -8,18 +8,18 @@ public class MainController {
 
     @GetMapping({"","/index"})
     public String index(){
-        return "/index";
+        return "index";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "/member/login";
-    }
-
-    @GetMapping("/join")
-    public String join(){
-        return "/member/join";
-    }
+//    @GetMapping("/login")
+//    public String login(){
+//        return "/member/login";
+//    }
+//
+//    @GetMapping("/join")
+//    public String join(){
+//        return "/member/join";
+//    }
 
     @GetMapping("/memberList")
     public String memberList(){

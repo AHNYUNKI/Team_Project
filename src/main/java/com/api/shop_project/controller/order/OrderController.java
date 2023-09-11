@@ -1,6 +1,7 @@
 package com.api.shop_project.controller.order;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.dto.response.order.OrderSearch;

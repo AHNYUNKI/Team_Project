@@ -56,11 +56,16 @@
 
 .login .login-con .login-form form ul>li:nth-child(1) input{
     border: 1px solid #cccccc;
+
     background-color: white;
+    color : black;
+
 }
 .login .login-con .login-form form ul>li:nth-child(2) input{
     border: 1px solid #cccccc;
+
     background-color: white;
+    color : black;
 }
 
 .login .login-con .login-form form ul>li:nth-child(5){
