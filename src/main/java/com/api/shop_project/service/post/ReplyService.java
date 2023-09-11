@@ -4,6 +4,8 @@ import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.domain.post.Reply;
 import com.api.shop_project.dto.request.reply.ReplySave;
+import com.api.shop_project.exception.PostNotFound;
+import com.api.shop_project.exception.ReplyNotFound;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.post.PostRepository;
 import com.api.shop_project.repository.post.ReplyRepository;
@@ -33,7 +35,7 @@ public class ReplyService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
-        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+        Post post = postRepository.findById(postId).orElseThrow(PostNotFound::new);
 
         Reply reply = replyRepository.save(Reply.builder()
                 .title(title)
@@ -135,7 +137,8 @@ public class ReplyService {
         Reply reply1 = replyRepository.findByMemberIdAndPostId(memberId,postId);
 
         if(reply1 == null){
-            throw new IllegalArgumentException("댓글을 찾을 수 없습니다.");
+            throw new ReplyNotFound();
+
         }
 
         Reply reply = Reply.builder()
@@ -156,9 +159,7 @@ public class ReplyService {
     public void replyDelete(Long id) {
 
         Optional<Reply> optionalReply =
-                Optional.ofNullable(replyRepository.findById(id).orElseThrow(()->{
-                    return new IllegalArgumentException("삭제할 아이디가 업습니다.");
-                }));
+                Optional.ofNullable(replyRepository.findById(id).orElseThrow(ReplyNotFound::new));
 
         replyRepository.delete(optionalReply.get());
 
