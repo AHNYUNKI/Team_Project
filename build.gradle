@@ -11,6 +11,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.14'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+
 }
 
 group = 'com.api'
@@ -60,6 +61,7 @@ dependencies {
 
 	// java객체를 JSON 문자열로 변경
 	implementation 'com.google.code.gson:gson:2.8.8'
+
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
@@ -82,8 +84,10 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	querydsl.extendsFrom compileClasspath
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
