@@ -24,13 +24,16 @@
                 <div class="login-con">
                     <div class="login-form">
                         <h1>로그인</h1>
-                        <form th:action="@{/}" method="post">
+                        <form th:action="@{/member/login}" method="post">
                             <ul>
                                 <li>
-                                    <input type="text" name="member_email" id="member_email" placeholder="  아이디를 입력해주세요">
+                                    <input type="text" name="email" id="email" placeholder="  아이디를 입력해주세요"
+                                           onfocus="this.placeholder=''" onblur="this.placeholder='  아이디를 입력해주세요'"
+                                           >
                                 </li>
                                 <li>
-                                    <input type="password" name="member_pw" id="member_pw" placeholder="  비밀번호를 입력해주세요">
+                                    <input type="password" name="password" id="password" placeholder="  비밀번호를 입력해주세요"
+                                           onfocus="this.placeholder=''" onblur="this.placeholder='  비밀번호를 입력해주세요'">
                                 </li>
                                 
                                 <li>
@@ -40,9 +43,9 @@
                                     <button type="button" onclick="location.href='join'">회원가입</button>
                                 </li>
                                 <li class="oauth-login">
-                                    <a th:href="@{/}"><img th:src="@{/images/oauth2/google.png}" alt="google"></a>
-                                    <a th:href="@{/}"><img th:src="@{/images/oauth2/kakao.jpg}" alt="kakao"></a>
-                                    <a th:href="@{/}"><img th:src="@{/images/oauth2/naver.jpg}" alt="naver"></a>
+                                    <a th:href="@{http://localhost:8095/login/oauth2/code/google}"><img th:src="@{/images/oauth2/google.png}" alt="google"></a>
+                                    <a th:href="@{http://localhost:8095/login/oauth2/code/kakao}"><img th:src="@{/images/oauth2/kakao.jpg}" alt="kakao"></a>
+                                    <a th:href="@{http://localhost:8095/login/oauth2/code/naver}"><img th:src="@{/images/oauth2/naver.jpg}" alt="naver"></a>
                                 </li>
                             </ul>
                         </form>

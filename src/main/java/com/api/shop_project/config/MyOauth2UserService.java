@@ -73,7 +73,7 @@ public class MyOauth2UserService extends DefaultOAuth2UserService {
         Member member = memberRepository.save(Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .name(email)                                // name 널이라 나중에 바꿔야함
+                .name(nickName)                                // name 널이라 나중에 바꿔야함
                 .role(Role.USER)
                 .build());
 

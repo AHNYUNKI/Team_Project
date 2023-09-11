@@ -1,10 +1,20 @@
 package com.api.shop_project.controller.member;
+
+import com.api.shop_project.config.MyUserDetails;
+import com.api.shop_project.config.UserPrincipal;
+import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.dto.response.member.MemberDto;
+import com.api.shop_project.dto.response.member.MemberSave;
+import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
 
 @RequestMapping("/member")
 @Controller
@@ -13,34 +23,22 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    private final MemberRepository memberRepository;
+
     @GetMapping("/join")
-    public String join() {
+    public String join2(Model model) {
+
+        MemberSave memberSave = new MemberSave();
+
+        model.addAttribute("memberSave", memberSave);
+
         return "member/join";
     }
 
-//    @PostMapping("/join")
-//    public String joinPost(MemberDto memberDto){
-//
-//        memberService.insertMember(memberDto);
-//
-//        return "redirect:/member/login";
-//    }
-
-//    @PostMapping("/join")
-//    public String joinPost(@RequestParam String email,
-//                           @RequestParam String password,
-//                           @RequestParam String name){
-//
-//
-//        memberService.insertMember(email, password, name);
-//
-//        return "redirect:/member/login";
-//    }
-
     @PostMapping("/join")
-    public String joinPost(@ModelAttribute MemberDto memberDto) {
+    public String joinPost2(@ModelAttribute MemberSave memberSave){
 
-        memberService.memberInsert(memberDto);
+        memberService.insertMember2(memberSave);
 
         return "redirect:/member/login";
     }
@@ -48,6 +46,17 @@ public class MemberController {
     @GetMapping("/login")
     public String login() {
         return "member/login";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal MyUserDetails myUserDetails){
+
+        MemberDto memberDto = memberService.memberDetail(id);
+
+        model.addAttribute("memberDto",memberDto);
+        model.addAttribute("myUserDetails",myUserDetails);
+
+        return "member/detail";
     }
 
     //삭제
@@ -65,29 +74,6 @@ public class MemberController {
         return "redirect:/member/join";
     }
 
-
-//    @PostMapping("/update")
-//    public void update(
-////            @PathVariable("memberId") Long memberId,
-////                       @RequestParam String password,
-////                       @RequestParam String name
-//                       @ModelAttribute Update memberDto
-////            ,
-////                       @RequestParam String email,
-////                       @RequestParam String address
-//
-//    ) {
-//
-////        memberService.update(memberId, password, name);
-//
-//        memberService.update(memberDto);
-//
-////        memberService.update(memberId, password, name, email, address);
-////        memberService.updatMember(memberId, password, name, email, address);
-//
-////        memberService.update(memberId, password, name, email, address);
-//
-//    }
 
     @PostMapping("/update")
     public String update(@ModelAttribute MemberDto memberDto
@@ -115,54 +101,34 @@ public class MemberController {
 
         if (member != null) {
             model.addAttribute("member", member);
-            return "member/memberUpdate";
+            return "member/update";
         }
 //        return "redirect:/member/memberList";
         return "redirect:/member/login";
     }
 
+    @GetMapping("/memberList")
+    public String memberList(Model model){
+        List<MemberDto> memberList = memberService.findAllList();
 
+        if (!memberList.isEmpty()) {
+            model.addAttribute("memberList", memberList);
+            return "member/memberList";
+        }
 
-//    @PostMapping("/update")
-//    public String update(MemberDto member, Model model) {
-//
-//        int rs = memberService.memberUpdateOk(memberDto);
-//
-//        if (rs == 1) {
-//            System.out.println("수정 Success!!");
-//        } else {
-//            System.out.println("수정 Fail!!");
-//        }
-//
-////    return "redirect:/member/memberList";
-////    MemberDto member = memberService.updateMember(member.getId());
-////
-////    if (member != null) {
-////        model.addAttribute("member", member);
-////        // member_id에 해당사는 덧글 목록
-////        List<ReplyDto> replyList = replyService.replyList(member.getId());
-////        model.addAttribute("replyList", replyList);
-////        return "member/memberDetail";
-////    }
-//        return "redirect:/member/memberList";
-//    }
-
-    @GetMapping
-    public String ReSave(MemberDto memberDto , Model model) {
-
-        model.addAttribute("memberDto", memberDto);
-
-        return "/member/join";
+        return "redirect:/index";
     }
 
-//    @PostMapping("/memberJoin")
-//    public String ReSave2(@ModelAttribute MemberDto memberDto) {
-//
-//        memberService.memberInsert(memberDto);
-//
-//        return "/";
-//
-//    }
 
+    @GetMapping("/userdata")
+    public String userData4(@AuthenticationPrincipal MyUserDetails myUserDetails, Model model){
+        Long memberid = myUserDetails.getMember().getId();
+
+        Member member = memberRepository.findById(memberid).get();
+
+        model.addAttribute("member",member);
+
+        return "member/test";
+    }
 
 }

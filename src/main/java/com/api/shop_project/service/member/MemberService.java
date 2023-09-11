@@ -4,12 +4,15 @@ import com.api.shop_project.domain.member.Address;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.dto.response.member.MemberDto;
+import com.api.shop_project.dto.response.member.MemberSave;
 import com.api.shop_project.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,17 +22,18 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-
-
 //    @Transactional
-//    public void insertMember(String email, String password, String name) {
+//    public void memberInsert(MemberDto memberdto) {
 //
 //        Long memberId = memberRepository.save(Member.builder()
-//                .email(email)
-//                .password(passwordEncoder.encode(password))
-//                .name(name)
-//                        .address(Address.builder()
-//                                .City("602호").build())
+//                .email(memberdto.getEmail())
+//                .password(passwordEncoder.encode(memberdto.getPassword()))
+//                .name(memberdto.getName())
+//                .address(Address.builder()
+//                        .City(memberdto.getAddress().getCity())
+//                        .street(memberdto.getAddress().getStreet())
+//                        .zipcode(memberdto.getAddress().getZipcode())
+//                        .build())
 //                .role(Role.USER)
 //                .build()).getId();
 //
@@ -40,17 +44,19 @@ public class MemberService {
 //    }
 
     @Transactional
-    public void memberInsert(MemberDto memberdto) {
+    public void insertMember2(MemberSave memberSave) {
+        Address address = Address.builder()
+                .City(memberSave.getCity())
+                .street(memberSave.getStreet())
+                .zipcode(memberSave.getZipcode())
+                .build();
 
         Long memberId = memberRepository.save(Member.builder()
-                .email(memberdto.getEmail())
-                .password(passwordEncoder.encode(memberdto.getPassword()))
-                .name(memberdto.getName())
-                .address(Address.builder()
-                        .City(memberdto.getAddress().getCity())
-                        .street(memberdto.getAddress().getStreet())
-                        .zipcode(memberdto.getAddress().getZipcode())
-                        .build())
+                .email(memberSave.getEmail())
+                .password(passwordEncoder.encode(memberSave.getPassword()))
+                .name(memberSave.getName())
+                .address(address)
+                .phone(memberSave.getPhone())
                 .role(Role.USER)
                 .build()).getId();
 
@@ -58,7 +64,9 @@ public class MemberService {
                 = memberRepository.findById(memberId).orElseThrow(() -> {
             throw new IllegalArgumentException("아이디가 없음.");
         });
+
     }
+
 
 //        memberRepository.findById(memberId).orElseThrow(IllegalArgumentException::new);
 
@@ -74,13 +82,6 @@ public class MemberService {
 
 
         public int memberDelete(Long id) {
-
-//    memberRepository.findById(id).orElseThrow(()->{
-//      return new IllegalArgumentException("삭제할 아이디가 없습니다.");
-//    });
-//    Member member=  Member.builder()
-//            .id(id)
-//            .build();
 
             Optional<Member> optionalMember=
                     Optional.ofNullable(memberRepository.findById(id).orElseThrow(() -> {
@@ -103,11 +104,11 @@ public class MemberService {
     @Transactional
     public int memberUpdate(MemberDto memberDto) {
 
-//        // MemberEntity id확인
-//        Optional<Member>  optionalMemberEntity=
-//                Optional.ofNullable(memberRepository.findById(memberDto.getId()).orElseThrow(() -> {
-//                    return new IllegalArgumentException("수정할 아이디가 없습니다.");
-//                }));
+        // MemberEntity id확인
+        Optional<Member>  optionalMemberEntity=
+                Optional.ofNullable(memberRepository.findById(memberDto.getId()).orElseThrow(() -> {
+                    return new IllegalArgumentException("수정할 아이디가 없습니다.");
+                }));
 
         Member memberEntity=
                 Member.builder()
@@ -162,14 +163,45 @@ public class MemberService {
         return null;
     }
 
+    @Transactional
+    public MemberDto memberDetail(Long id) {
+        Member memberEntity = memberRepository.findById(id).orElseThrow(()->{
+            throw new IllegalArgumentException("아이디가 없습니다.");
+        });
 
-
-
-    private int addressDiv(String address) {
-        int rs=0;
-        return rs;
+        return MemberDto.builder()
+                .id(memberEntity.getId())
+                .name(memberEntity.getName())
+                .email(memberEntity.getEmail())
+                .password(memberEntity.getPassword())
+                .phone(memberEntity.getPhone())
+                .role(memberEntity.getRole())
+                .address(memberEntity.getAddress())
+                .build();
     }
 
+    public List<MemberDto> findAllList() {
+        List<MemberDto> memberDtos = new ArrayList<>();
+        List<Member> members = memberRepository.findAll();
 
+        if (!members.isEmpty()){
+            for (Member member : members){
+                MemberDto memberDto = MemberDto.builder()
+                        .id(member.getId())
+                        .name(member.getName())
+                        .email(member.getEmail())
+                        .password(member.getPassword())
+                        .phone(member.getPhone())
+                        .role(member.getRole())
+                        .address(member.getAddress())
+                        .createTime(member.getCreateTime())
+                        .updateTime(member.getUpdateTime())
+                        .build();
+                memberDtos.add(memberDto);
+            }
+        }
+
+        return memberDtos;
+    }
 
 }

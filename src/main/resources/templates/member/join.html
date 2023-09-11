@@ -31,47 +31,47 @@
                          <span>필수입력사항</span>
                     </div>
 
-                    <form th:action="@{/}" method="post">
+                    <form th:action="@{/member/join}" method="post">
                         <ul>
                             <li>
-                                <label for="member_email">
+                                <label th:for="email">
                                     이메일
                                     <span>*</span>
                                 </label>
-                                <input type="email" name="member_email" id="member_email" placeholder=" 아이디를 입력해주세요">
+                                <input type="email" th:field="*{memberSave.email}" placeholder=" 아이디를 입력해주세요">
                                 <button>중복확인</button>
                             </li>
                             <li>
-                                <label for="member_pw">
+                                <label th:for="password">
                                     비밀번호
                                     <span>*</span>
                                 </label>
-                                <input type="password" name="member_pw" id="member_pw" placeholder=" 비밀번호를 입력해주세요">    
+                                <input type="password" th:field="*{memberSave.password}" placeholder=" 비밀번호를 입력해주세요">
                                 <div></div>
                             </li>
                             <li>
-                                <label for="member_name">
+                                <label th:for="name">
                                     이름
                                     <span>*</span>
                                 </label>
-                                <input type="text" name="member_name" id="member_name" placeholder=" 이름을 입력해 주세요">    
+                                <input type="text" th:field="*{memberSave.name}" placeholder=" 이름을 입력해주세요">
                                 <div></div>
                             </li>
                             
                             <li>
-                                <label for="member_phone">
+                                <label th:for="phone">
                                     휴대폰
                                     <span>*</span>
                                 </label>
-                                <input type="text" name="member_phone" id="member_phone" placeholder=" 숫자만 입력해 주세요">    
+                                <input type="text" th:field="*{memberSave.phone}" placeholder=" 숫자만 입력해주세요">
                                 <div></div>
                             </li>
                             <li>
-                                <label for="member_address">
+                                <label th:for="city">
                                     주소
                                     <span>*</span>
                                 </label>
-                                <input type="text" name="member_address" id="member_address" placeholder=" 비밀번호를 입력해주세요">    
+                                <input type="text" th:field="*{memberSave.city}" placeholder=" 주소를 입력해주세요">
                                 <div></div>
                             </li>
                         </ul>

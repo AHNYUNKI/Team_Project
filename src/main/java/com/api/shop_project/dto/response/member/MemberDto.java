@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Setter
@@ -30,8 +33,14 @@ public class MemberDto {
 
     private Role role;
 
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
+
+
+
     @Builder
-    public MemberDto(Long id, String email, String password, String name, String phone, Address address, Role role) {
+    public MemberDto(Long id, String email, String password, String name, String phone, Address address, Role role, LocalDateTime createTime, LocalDateTime updateTime) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -39,6 +48,8 @@ public class MemberDto {
         this.phone = phone;
         this.address = address;
         this.role = role;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
 //    @Builder
