@@ -7,6 +7,7 @@
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    /* position: fixed; */
 }
 
 .header .header-con{
@@ -319,3 +320,4 @@
 .header .header-con .bottom-header .bottom-right a .inner span:nth-child(1){
     color:purple;
 }
+/* Bottom-Header End */
