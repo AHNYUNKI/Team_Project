@@ -29,7 +29,7 @@ public class ReplyService {
 
 
     @Transactional
-    public Reply replyInsert(Long memberId, Long postId, String title, String content) {
+    public Reply replyInsert(Long memberId, Long postId, String content) {
 
         ReplySave replySave = new ReplySave();
 
@@ -38,7 +38,6 @@ public class ReplyService {
         Post post = postRepository.findById(postId).orElseThrow(PostNotFound::new);
 
         Reply reply = replyRepository.save(Reply.builder()
-                .title(title)
                 .content(content)
                 .writer(member.getName())
                 .member(member)
@@ -102,10 +101,12 @@ public class ReplyService {
         List<Reply> replyList = replyRepository.findAllByPost(post);
         for (Reply reply : replyList) {
             ReplySave replyVo = ReplySave.builder()
-                    .title(reply.getTitle())
+                    .id(reply.getId())
                     .content(reply.getContent())
                     .writer(reply.getWriter())
                     .post(reply.getPost())
+                    .createTime(reply.getCreateTime())
+                    .updateTime(reply.getUpdateTime())
                     .build();
 
             replyVos.add(replyVo);
@@ -117,7 +118,7 @@ public class ReplyService {
 
 
     @Transactional
-    public Reply replyUpdateOk(Long replyId, Long memberId, Long postId, String title, String content) {
+    public Reply replyUpdateOk(Long replyId, Long memberId, Long postId, String content) {
 
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
@@ -134,16 +135,15 @@ public class ReplyService {
 //
 //        Long replyId = replyRepository.save(reply).getId();
 
-        Reply reply1 = replyRepository.findByMemberIdAndPostId(memberId,postId);
-
-        if(reply1 == null){
-            throw new ReplyNotFound();
-
-        }
+//        Reply reply1 = replyRepository.findByMemberIdAndPostId(memberId,postId);
+//
+//        if(reply1 == null){
+//            throw new ReplyNotFound();
+//
+//        }
 
         Reply reply = Reply.builder()
                 .id(replyId)
-                .title(title)
                 .content(content)
                 .member(member)
                 .writer(member.getName())
@@ -151,17 +151,46 @@ public class ReplyService {
                 .build();
 
 
+//        return replyRepository.save(reply);
         return replyRepository.save(reply);
 
     }
 
 
-    public void replyDelete(Long id) {
+    public Reply replyDelete(Long id) {
 
-        Optional<Reply> optionalReply =
-                Optional.ofNullable(replyRepository.findById(id).orElseThrow(ReplyNotFound::new));
+//        Optional<Reply> optionalReply =
+//                Optional.ofNullable(replyRepository.findById(id).orElseThrow(ReplyNotFound::new));
+        Reply reply = replyRepository.findById(id).orElseThrow(ReplyNotFound::new);
 
-        replyRepository.delete(optionalReply.get());
+        replyRepository.delete(reply);
+
+        return reply;
+    }
+
+
+    public ReplySave replyUpdate(Long id) {
+
+        Optional<Reply> optionalReplySave =
+                Optional.ofNullable(replyRepository.findById(id).orElseThrow(()->{
+                    return new IllegalArgumentException("업데이트할 아이디 없음");
+                }));
+
+        if (optionalReplySave.isPresent()){
+
+            ReplySave replySave =
+                    ReplySave.builder()
+                            .id(optionalReplySave.get().getId())
+                            .content(optionalReplySave.get().getContent())
+                            .writer(optionalReplySave.get().getWriter())
+                            .createTime(optionalReplySave.get().getCreateTime())
+                            .updateTime(optionalReplySave.get().getUpdateTime())
+                            .post(optionalReplySave.get().getPost())
+                            .build();
+
+            return replySave;
+        }
+        return null;
 
     }
 

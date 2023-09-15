@@ -78,14 +78,13 @@ public class ReplyServiceTest {
 
         // when
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
                 .member(member)
                 .build();
 
-        replyService.replyInsert(member.getId(), post.getId(), replySave.getTitle(), replySave.getContent());
+        replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
 
 //        Reply saveReply = replyRepository.save(reply);
 
@@ -128,7 +127,6 @@ public class ReplyServiceTest {
                 .mapToObj(i -> (Reply.builder()
                         .post(post1)
                         .member(member1)
-                        .title("댓글이오" + i)
                         .content("내용임" + i)
                         .writer(member1.getName())
                         .build()
@@ -140,7 +138,7 @@ public class ReplyServiceTest {
 
         List<Reply> list = replyRepository.saveAll(replies);
 
-        list.get(0).getTitle();
+        list.get(0).getContent();
 
 //        ReplyRepository
 
@@ -171,14 +169,13 @@ public class ReplyServiceTest {
 
 
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getTitle(), replySave.getContent());
+        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
 
 
         // when
@@ -195,9 +192,8 @@ public class ReplyServiceTest {
 
 
         // then
-        Reply updatedReply = replyService.replyUpdateOk(reply.getId(),memberId,postId,updatedTitle,updatedContent);
+        Reply updatedReply = replyService.replyUpdateOk(reply.getId(),memberId,postId,updatedContent);
         Assertions.assertNotNull(updatedReply);
-        Assertions.assertEquals(updatedTitle,updatedReply.getTitle());
         Assertions.assertEquals(updatedContent,updatedReply.getContent());
 //        Reply reply = replyRepository.findAll().get(0);
 //        Assertions.assertNotNull(reply.getId());
@@ -231,14 +227,13 @@ public class ReplyServiceTest {
 
 
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getTitle(), replySave.getContent());
+        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
 
 
 

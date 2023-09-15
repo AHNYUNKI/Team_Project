@@ -202,6 +202,26 @@ public class PostService {
     }
 
 
+    public Page<PostSave> postPagingList2(Pageable pageable, String subject, String search) {
+        Page<Post> posts =null;
+
+        if (subject == null) {
+            posts = postRepository.findAll(pageable);
+        } else if (subject.equals("title")) {
+            posts = postRepository.findByTitleContains(pageable,search);
+        } else if (subject.equals("writer")) {
+            posts = postRepository.findByWriterContains(pageable,search);
+        } else if (subject.equals("content")){
+            posts = postRepository.findByContentContains(pageable,search);
+        } else {
+            posts = postRepository.findAll(pageable);
+        }
+
+        Page<PostSave> postVos = posts.map(PostSave::toBoardDto);
+
+        return postVos;
+
+    }
 }
 
 

@@ -1,3 +1,7 @@
+server:
+  port: 8095
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,11 +12,21 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create # DDL?? ??
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
+#  profiles:
+#    include: oauth2
+
   thymeleaf:
-    check-template-location: false
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+
+
+  profiles:
+    include: oauth2

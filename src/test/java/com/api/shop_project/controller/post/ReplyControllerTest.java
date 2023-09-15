@@ -92,7 +92,6 @@ public class ReplyControllerTest {
 
         // when
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
@@ -106,7 +105,6 @@ public class ReplyControllerTest {
         mockMvc.perform(post("/reply/write")
                         .param("memberId", String.valueOf(member.getId()))
                         .param("postId", String.valueOf(post.getId()))
-                        .param("title", replySave.getTitle())
                         .param("content", replySave.getContent()))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -143,7 +141,6 @@ public class ReplyControllerTest {
                 .mapToObj(i -> (Reply.builder()
                         .post(post)
                         .member(member)
-                        .title("댓글이오" + i)
                         .content("내용임" + i)
                         .writer(member.getName())
                         .build()
@@ -195,14 +192,13 @@ public class ReplyControllerTest {
 
 
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getTitle(), replySave.getContent());
+        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
 
 
         // when
@@ -253,14 +249,13 @@ public class ReplyControllerTest {
 
         // when
         ReplySave replySave = ReplySave.builder()
-                .title("제목1")
                 .content("내용1")
                 .writer(member.getName())
                 .post(post)
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getTitle(), replySave.getContent());
+        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
 
         //
         mockMvc.perform(post("/reply/delete/{id}", 1L))

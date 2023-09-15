@@ -1,6 +1,8 @@
 package com.api.shop_project.repository.post;
 
 import com.api.shop_project.domain.post.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,5 +29,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     void updateHit(@Param("id") Long id);
 
 
+    Page<Post> findByContentContains(Pageable pageable, String search);
 
+    Page<Post> findByTitleContains(Pageable pageable, String search);
+
+    Page<Post> findByWriterContains(Pageable pageable, String search);
 }

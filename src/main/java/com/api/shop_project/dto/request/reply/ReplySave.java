@@ -6,17 +6,17 @@ import com.api.shop_project.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
+@Setter
 @Getter
 @NoArgsConstructor
-public class ReplySave extends BaseTime {
+public class ReplySave {
 
     private Long id;
-
-    @NotBlank(message = "제목은 필수입니다.")
-    private String title;
 
     @NotBlank(message = "내용은 필수입니다.")
     private String content;
@@ -27,13 +27,18 @@ public class ReplySave extends BaseTime {
 
     private Member member;
 
+    private LocalDateTime createTime;
+
+    private LocalDateTime updateTime;
+
     @Builder
-    public ReplySave(Long id, String title, String content, String writer, Post post, Member member) {
+    public ReplySave(Long id, String content, String writer, Post post, Member member, LocalDateTime createTime, LocalDateTime updateTime) {
         this.id = id;
-        this.title = title;
         this.content = content;
         this.writer = writer;
         this.post = post;
         this.member = member;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 }

@@ -1,6 +1,9 @@
 package com.api.shop_project.controller.post;
 
+import com.api.shop_project.domain.post.Post;
+import com.api.shop_project.domain.post.Reply;
 import com.api.shop_project.dto.request.reply.ReplySave;
+import com.api.shop_project.dto.response.post.PostSave;
 import com.api.shop_project.service.post.PostService;
 import com.api.shop_project.service.post.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -22,37 +25,52 @@ public class ReplyController {
 
 
     @PostMapping("/write")
-    public String replyWrite(@Valid @RequestParam Long memberId,
+    public String replyWrite(@RequestParam Long memberId,
                              @RequestParam Long postId,
-                             @RequestParam String title,
                              @RequestParam String content){
 
-        replyService.replyInsert(memberId, postId, title, content);
+        replyService.replyInsert(memberId, postId, content);
 
-        return "index";
+        return "redirect:/post/postDetail/" + postId;
 
     }
 
     @PostMapping("/update")
-    public String replyUpdate(@Valid @RequestParam Long replyId,
+    public String replyUpdate(@Valid @RequestParam Long id,
                               @RequestParam Long memberId,
                               @RequestParam Long postId,
-                              @RequestParam String title,
                               @RequestParam String content){
 
-        replyService.replyUpdateOk(replyId, memberId, postId, title, content);
+        replyService.replyUpdateOk(id, memberId, postId, content);
 
-        return "index";
+        return "redirect:/post/postDetail/" + postId;
 
     }
 
-    @PostMapping("/delete/{id}")
-    public String replyDelete(@PathVariable("id") Long id, Model model){
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") Long id, Model model) {
 
-        replyService.replyDelete(id);
+        ReplySave replySave = replyService.replyUpdate(id);
 
+        if (replySave != null) {
+            model.addAttribute("replySave", replySave);
+            return "reply/replyUpdate";
+        }
         return "index";
     }
+
+    @GetMapping("/delete/{id}")
+    public String replyDelete(@PathVariable("id") Long id,
+                              Model model){
+
+        Reply reply = replyService.replyDelete(id);
+
+        Long postId = reply.getPost().getId();
+
+        return "redirect:/post/postDetail/" + postId;
+    }
+
+
 
 
 }
