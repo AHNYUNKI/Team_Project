@@ -1,9 +1,11 @@
 package com.api.shop_project.controller.cart;
 
+import com.api.shop_project.config.UserPrincipal;
 import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.service.cart.CartService;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,29 +21,33 @@ public class CartController {
 
     private CartService cartService;
 
-
-    @PostMapping("/carts")
-    public void addCart(@RequestParam Long memberId,
+    @PostMapping("/cart/add")
+    public String addCart(@AuthenticationPrincipal UserPrincipal principal,
                         @RequestParam Long itemId,
                         @RequestParam int count,
                         @RequestParam int total) {
-        cartService.addCart(memberId, itemId, count, total);
+        cartService.addCart(principal.getMemberId(), itemId, count, total);
+
+        return "/carts";
+
     }
 
-    @GetMapping("/carts/{memberId}")
-    public void cartList(@PathVariable("memberId") Long memberId, Model model) {
+    @GetMapping("/carts")
+    public String cartList(@AuthenticationPrincipal UserPrincipal principal, Model model) {
 
-        List<CartItem> carts = cartService.cartFindOne(memberId);
+        List<CartItem> carts = cartService.cartFindOne(principal.getMemberId());
 
         model.addAttribute("carts", carts);
 
-//        return "/";
+        return "/cart/cart";
     }
 
     @PostMapping("/carts/{itemId}")
-    public void cartCancel(@PathVariable("itemId") Long itemId) {
+    public String cartCancel(@PathVariable("itemId") Long itemId) {
 
         cartService.cartCancel(itemId);
+
+        return "/cart/cart";
 
     }
 }
