@@ -16,7 +16,7 @@
     /* border: 1px solid; */
 }
 
-.container-con .join{
+.container-con .insert{
     flex-basis: 1000px;
     display: flex;
     justify-content: center;
@@ -24,45 +24,37 @@
     /* border: 1px solid; */
 }
 
-.container-con .join .join-con{
+.container-con .insert .insert-con{
     box-sizing: border-box;
-    width: 100%;
+    width: 50%;
 }
 
-.container-con .join .join-con .join-header{
+.container-con .insert .insert-con .insert-header{
     box-sizing: border-box;
     width: 100%;
     display: flex;
     justify-content: center;
     font-size: 16px;
     padding: 10px;
-}
-
-.container-con .join .join-con .join-header2{
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 0;
-    gap: 2px;
     border-bottom: 2px solid rgb(51, 51, 51);
 }
 
-.container-con .join .join-con .join-header2 span:nth-child(1){
+
+.container-con .insert .insert-con .insert-header2 span:nth-child(1){
     color: red;
     font-size: 13px;
 }
 
-.container-con .join .join-con .join-header2 span:nth-child(2){
+.container-con .insert .insert-con .insert-header2 span:nth-child(2){
     color: #727272;
     font-size: 16px;
 }
 
-.container-con .join .join-con form{
+.container-con .insert .insert-con form{
     width: 100%;
 }
 
-.container-con .join .join-con form>ul{
+.container-con .insert .insert-con form>ul{
     box-sizing: border-box;
     padding: 7px 12px;
     display: flex;
@@ -70,7 +62,7 @@
     border-bottom: 2px solid rgb(51, 51, 51);
 }
 
-.container-con .join .join-con form>ul>li{
+.container-con .insert .insert-con form>ul>li{
     box-sizing: border-box;
     padding: 10px 1px;
     display: flex;
@@ -79,24 +71,24 @@
     align-items: center;
 }
 
-.container-con .join .join-con form>ul>li>label{
+.container-con .insert .insert-con form>ul>li>label{
     flex: 1;
     font-weight: bold;
     padding: 10px 3px;
 }
 
-.container-con .join .join-con form>ul>li>label>span{
+.container-con .insert .insert-con form>ul>li>label>span{
     color: red;
 }
 
-.container-con .join .join-con form>ul>li>input{
+.container-con .insert .insert-con form>ul>li:not(:nth-child(4))>input{
     flex: 3;
     padding: 10px 3px;
     border: 1px solid #cccccc;
     border-radius: 5px;
 }
 
-.container-con .join .join-con form>ul>li>button{
+.container-con .insert .insert-con form>ul>li>button{
     flex: 1;
     border: 1px solid purple;
     border-radius: 4px;
@@ -104,41 +96,26 @@
     text-align: center;
     color: purple;
     padding: 10px 3px;
-    cursor:pointer;
-}
-.container-con .join .join-con form>ul>li>button:hover{
-background-color: purple;
-color: white;
 }
 
-.container-con .join .join-con form>ul>li>div{
+.container-con .insert .insert-con form>ul>li>div{
     flex: 1;
 }
 
-.container-con .join .join-con form>ul>li:nth-child(6) {
-    display: flex;
-    justify-content: center;
-}
 
-.container-con .join .join-con form .go-join{
+.container-con .insert .insert-con form .go-insert{
     display: flex;
     justify-content: center;
     padding: 20px 0 0 0;
 }
 
-.container-con .join .join-con form .go-join input{
+.container-con .insert .insert-con form .go-insert input{
     width: 200px;
     height: 40px;
     border: 1px solid purple;
-    border-radius: 4px;
+    border-radius: 2px;
     background-color: purple;
     color: white;
-    cursor:pointer;
-}
-.container-con .join .join-con form .go-join input:hover{
-border: 1px solid purple;
-background-color: white;
-color: purple;
 }
 
 

@@ -1,0 +1,150 @@
+@import url(/css/common/reset.css);
+@import url(/css/common/header.css);
+@import url(/css/common/footer.css);
+/*detail*/
+*{box-sizing: border-box;}
+
+.detail {
+    width: 100%;
+    height: auto;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: center;
+    
+}
+
+.detail .detail-con{
+    flex-basis: 1050px;
+    /* border: 1px solid; */
+    display: flex;
+    flex-direction: column;
+}
+
+.detail .detail-con .detail-con-header{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid;
+}
+
+.detail .detail-con .detail-con-header .sec1{
+    padding: 30px;
+    text-align: center;
+
+}
+
+.detail .detail-con .detail-con-header .sec1 h1{
+    color: #333333;
+    font-size: 20px;
+}
+
+.detail .detail-con .detail-con-header .sec1 h4{
+    color: #999999;
+    padding: 5px 0 0 0;
+}
+
+/* form */
+.detail-con-form{
+    width: 100%;
+}
+
+.detail-con-form form>ul{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid;
+    padding: 0 0 10px 0;
+}
+
+.detail-con-form form>ul>li{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.detail-con-form form>ul>li label{
+    flex: 1;
+    background-color: #F7F5F8;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.detail-con-form form>ul>li input{
+    flex: 7;
+    border: 0;
+}
+
+/* .detail-con-form form>ul>li:nth-child(1) label{
+    flex: 1;
+    background-color: #F7F5F8;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.detail-con-form form>ul>li:nth-child(1) input{
+    flex: 7;
+    border: 0;
+}
+
+.detail-con-form form>ul>li:nth-child(2) label{
+    flex: 1;
+    background-color: #F7F5F8;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.detail-con-form form>ul>li:nth-child(2) input{
+    flex: 7;
+    border: 0;
+}
+
+.detail-con-form form>ul>li:nth-child(3) label{
+    flex: 1;
+    background-color: #F7F5F8;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.detail-con-form form>ul>li:nth-child(3) input{
+    flex: 7;
+    border: 0;
+}
+
+.detail-con-form form>ul>li:nth-child(4) label{
+    flex: 1;
+    background-color: #F7F5F8;
+    font-weight: 800;
+    padding: 5px;
+}
+
+.detail-con-form form>ul>li:nth-child(4) input{
+    flex: 7;
+    border: 0;
+} */
+
+.detail-con-form form .sec2{
+    padding: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.detail-con-form form .sec2 button{
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    align-items: center;
+    background-color: purple;
+    border: 1px solid purple;
+    border-radius: 4px;
+}
+
+.detail-con-form form .sec2 button a{
+    color: white;
+}
+
+
+
+
+
+
+
+

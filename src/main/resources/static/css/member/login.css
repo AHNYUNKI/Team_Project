@@ -92,10 +92,7 @@
     background-color: purple;
     color: white;
     border: 0;
-}
-
-.login .login-con .login-form form ul>li:nth-child(3){
-    padding: 30px 0 0 0;
+    cursor:pointer;
 }
 
 .login .login-con .login-form form ul>li>button{
@@ -106,5 +103,23 @@
     color: purple;
     border: 1px solid purple;
     font-weight: bold;
+    cursor:pointer;
 }
 
+.login .login-con .login-form form ul>li:nth-child(3){
+    padding: 30px 0 0 0;
+}
+
+/*
+
+.login .login-con .login-form form ul>li>input:hover{
+    border: 1px solid purple;
+    background-color: white;
+    color: purple;
+}
+
+.login .login-con .login-form form ul>li>button:hover{
+    background-color: purple;
+    color: white;
+}
+*/

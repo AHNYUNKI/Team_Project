@@ -7,7 +7,11 @@
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    /* position: fixed; */
+    position: sticky;
+    top:0;
+    z-index:999;
+    background-color:white;
+    padding :5px 0;
 }
 
 .header .header-con{
@@ -32,13 +36,12 @@
 }
 
 .header .header-con .top-header>ul>li{
-    
     font-weight: bold;
     padding: 5px 10px 5px 0px;
     position: relative;
 }
 
-.header .header-con .top-header>ul>li:nth-child(1) a{
+.header .header-con .top-header>ul>li:nth-child(2) a{
     color: purple;
 }
 
@@ -78,7 +81,7 @@
     display: inline-block;
     width: auto;
     vertical-align: top;
-    
+
     text-align: center;
     font-size: 12px;
 
@@ -103,6 +106,8 @@
     display: block;
     position: absolute;
 
+    z-index : 3;
+
     justify-content: center;
 }
 .header .header-con .top-header .member-bar {
@@ -125,8 +130,8 @@
 .header .header-con .top-header >ul>li > .member-bar a .span {
 
 }
-
 /* --------------------------------------------------------- */
+
 
 /* TOP-HEADER END */
 
@@ -140,6 +145,12 @@
     justify-content: space-between;
     padding: 15px 0px;
     box-sizing: border-box;
+
+    /*
+        position: relative;
+        display: inline-block;
+     */
+
 }
 
 .header .header-con .middle-header .left{
@@ -255,10 +266,15 @@
     cursor: pointer;
 }
 
+/* midle right */
+
 .header .header-con .middle-header .right{
     flex: 1;
+
     display: flex;
+
     justify-content: flex-end;
+
 }
 
 .header .header-con .middle-header .right>ul{
@@ -279,7 +295,44 @@
     width: 30px;
     height: 37px;
     padding: 7px 0 0 0;
+
+                position: relative;
+                display: inline-block;
+
 }
+
+
+.header .header-con .middle-header .right .address-bar {
+    display: none;
+    position: absolute;
+
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+
+    top: 55%;
+    right: 15%;
+
+    width: 250px;
+    height: 100px;
+
+    z-index : 2;
+
+}
+
+
+.header .header-con .middle-header .right>ul>li:hover + .address-bar {
+    display: block;
+}
+
+.header .header-con .middle-header .right .address-bar > span {
+    padding: 10px;
+}
+
+/* ======================================================== */
+
+
+/* ======================================================== */
+
 /* middle-Header END */
 
 
@@ -332,6 +385,38 @@
     box-sizing: border-box;
 }
 
+.category-sec1{
+    position: relative;
+    display: inline-block;
+}
+
+.category-sec1 .category{
+    width: 250px;
+
+    display: none;
+    position: absolute;
+    z-index: 99;
+
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+.category-sec1 .category a{
+    width:auto;
+
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    margin: 10px;
+}
+
+.category-sec1 .category a:hover{
+    color: purple;
+}
+
+.category-sec1:hover .category{
+    display: block;
+}
 
 .header .header-con .bottom-header .bottom-middle{
     flex: 4;

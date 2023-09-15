@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/kurlyLayout}"
+>
+<th:block layout:fragment="title">
+  <title>memberDetail</title>
+</th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/post/postDetail.css}">
+</th:block>
+<th:block layout:fragment="javascript">
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
+  <script th:src="@{/js/detail.js}" defer></script>
+</th:block>
+<th:block layout:fragment="container">
+  <div class="container">
+    <div class="detail">
+      <div class="detail-con">
+        <div class="detail-con-header">
+          <div class="sec1">
+            <h1>공지사항</h1>
+            <h4>컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요</h4>
+          </div>
+        </div>
+        <div class="detail-con-form">
+            <form th:action="@{/post/postDetail}" method="post">
+              <ul>
+                <li>
+                    <label th:for="id">번호</label>
+                    <!-- <input type="text" id="id" name="id" th:value="${post.id}" readonly> -->
+                    <input type="text" id="id" name="id" readonly>
+                </li>
+                <li>
+                    <label th:for="title">제목</label>
+                    <!-- <input type="text" id="title" name="title" th:value="${post.title}" readonly> -->
+                    <input type="text" id="title" name="title" readonly>
+                </li>
+                <li>
+                  <label th:for="writer">작성자</label>
+                  <!-- <input type="text" id="writer" name="writer" th:value="${post.writer}" readonly> -->
+                  <input type="text" id="writer" name="writer" readonly>
+                </li>
+                <li>
+                    <!-- <label for="createTime">createTime</label>
+                      <label th:if="${post.createTime} == null" th:for="updateTime">
+                        <input type="text" id="updateTime" name="updateTime" th:value="${post.upDateTime}" readonly>
+                      </label> -->
+                      <label>작성일</label>
+                      <label>
+                        <input type="text" id="updateTime" name="updateTime" readonly>
+                      </label>
+                      
+                      <!-- 
+                        <label th:unless="${post.createTime} == null" th:for="createTime">
+                          <input type="text" id="createTime" name="createTime" th:value="${post.createTime}" readonly>
+                        </label> -->
+                        <label>
+                          <input type="text" id="createTime" name="createTime"readonly>
+                        </label>
+                    
+                  </li>
+                  <li>
+                      <label th:for="content">내용</label>
+                      <!-- <input type="text" id="content" name="content" th:value="${post.content}" readonly> -->
+                      <input type="textarea" id="content" name="content" readonly>
+                  </li>
+              </ul>
+                <div class="sec2">
+                    <!-- <a th:href="@{/post/postDelete/{id}(id=${post.id})}">삭제</a>
+                    <a th:href="@{/post/postUpdate/{id}(id=${post.id})}">수정</a> -->
+                    <button><a th:href="@{/post/postDelete/}">삭제</a></button>
+                    <button><a th:href="@{/post/postUpdate/}">수정</a></button>
+                    <button><a th:href="@{#}">목록</a></button>
+                </div>
+           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</th:block>
+</html>

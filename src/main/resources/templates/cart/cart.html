@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/kurlylayout}"
+>
+
+
+<th:block layout:fragment="title">
+    <title>장바구니</title>
+</th:block>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.6.3/css/all.css}"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/cart/cart.css}">
+</th:block>
+
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{/js/cart/cart.js}"></script>
+</th:block>
+
+<th:block layout:fragment="container">
+    <div class="container">
+        <div class="container-con">
+            <div class="cart">
+                <div class="cart-con">
+                    <div class="cart-header">
+                        <div class="headName">
+                            <h1>장바구니</h1>
+                        </div>
+                    </div>
+
+                    <div class="cart-con-container">
+                        <form name="orderform" id="orderform" method="post" class="orderform" th:action="@{/Page}" onsubmit="return false;">
+    
+                            <input type="hidden" name="cmd" value="order">
+                            <div class="basketdiv" id="basket">
+                                <div class="row head">
+                                    <div class="subdiv">
+                                        <div class="check">선택</div>
+                                        <div class="img">이미지</div>
+                                        <div class="pname">상품명</div>
+                                    </div>
+                                    <div class="subdiv">
+                                        <div class="basketprice">가격</div>
+                                        <div class="num">수량</div>
+                                        <div class="sum">합계</div>
+                                    </div>
+                                    <div class="subdiv">
+                    
+                                        <div class="basketcmd">삭제</div>
+                                    </div>
+                                    <div class="split"></div>
+                                </div>
+                                
+                                <!-- 나중에 꼭 li에 th:foreach써서 활용하기  -->
+                                <ul>
+                                <li  >
+                                
+                                <div class="row data">
+                                    <div class="subdiv">
+                                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" th:onclick="|javascript:basket.checkItem();|">&nbsp;</div>
+                                        <div class="img"><img src="./img/cart.jpg" width="60"></div>
+                                        <div class="pname">
+                                            <span>상품1</span>
+                                        </div>
+                                    </div>
+                                    <div class="subdiv">
+                                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="20000">20,000원</div>
+                                        <div class="num">
+                                            <div class="updown">
+                                                <input type="text" name="p_num1" id="p_num1" size="2" maxlength="4" class="p_num" value="2" th:onkeyup="|javascript:basket.changePNum('${1}');|">
+                                                <span th:onclick="|javascript:basket.changePNum('${1}');|"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                                <span th:onclick="|javascript:basket.changePNum('${1}');|"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="sum">40,000원</div>
+                                    </div>
+                                    <div class="subdiv">
+                                        <div class="basketcmd"><a th:href="|javascript:void(0)|" class="abutton" th:onclick="|javascript:basket.delItem();|">삭제</a></div>
+                                    </div>
+                                </div>
+                                </li>
+
+                                <!-- 상품2 시작 value값, id,name,신경써서 바꿔주어야적용됩니다. -->
+                                <li>
+                                <div class="row data">
+                                    <div class="subdiv">
+                                        <div class="check"><input type="checkbox" name="buy" value="261" checked="" th:onclick="|javascript:basket.checkItem();|">&nbsp;</div>
+                                        <div class="img"><img src="./img/cart2.jpg" width="60"></div>
+                                        <div class="pname">
+                                            <span>상품2</span>
+                                        </div>
+                                    </div>
+                                    <div class="subdiv">
+                                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price2" class="p_price" value="19000">19,000원</div>
+                                        <div class="num">
+                                            <div class="updown">
+                                                <input type="text" name="p_num2" id="p_num2" size="2" maxlength="4" class="p_num" value="1" th:onkeyup="|javascript:basket.changePNum('${2}');|">
+                                                <span th:onclick="|javascript:basket.changePNum('${2}');|"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+                                                <span th:onclick="|javascript:basket.changePNum('${2}');|"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="sum">19,000원</div>
+                                    </div>
+                                    <div class="subdiv">
+                                        <div class="basketcmd"><a th:href="|javascript:void(0)|" class="abutton" th:onclick="|javascript:basket.delItem();|">삭제</a></div>
+                                    </div>
+                                </div>
+                                </li>
+                            </ul>
+                            </div>
+
+
+                            <div class="right-align basketrowcmd">
+                                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
+                                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
+                            </div>
+
+                            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 4개</div>
+                            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 74,200원</div>
+
+                            <div id="goorder" class="">
+                                <div class="clear"></div>
+                                <div class="buttongroup center-align cmd">
+                                    <a href="javascript:void(0);">선택한 상품 결제</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</th:block>
+</html>
