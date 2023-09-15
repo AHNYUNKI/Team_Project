@@ -60,7 +60,6 @@ public class MyUserDetails implements UserDetails, OAuth2User {
     public String getUsername() {
 
         return member.getName();
-//        return member.getEmail();
     }
 
     @Override

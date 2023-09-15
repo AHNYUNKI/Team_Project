@@ -1,5 +1,6 @@
 package com.api.shop_project.config;
 
+import com.api.shop_project.domain.member.Address;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.repository.member.MemberRepository;
@@ -43,16 +44,17 @@ public class MyOauth2UserService extends DefaultOAuth2UserService {
 
         String email = "";
         String password = "dkarjsk";
-        String nickName="";
+        String name="";
 
         if (resistrateId.equals("google")) {
             email = (String) attributes.get("email");
+            name = (String) attributes.get("name");
 
         } else if (resistrateId.equals("naver")) {
             Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
             email =(String) response.get("email");
-            nickName = (String) response.get("name");
+            name = (String) response.get("name");
 
         }else if(resistrateId.equals("kakao")){
             //JSON -> Map 변환
@@ -61,7 +63,7 @@ public class MyOauth2UserService extends DefaultOAuth2UserService {
             Map<String, Object> profile=(Map<String, Object>) response.get("profile");
 
             email=(String) response.get("email");
-            nickName = (String) profile.get("nickname");
+            name = (String) profile.get("nickname");
         }
 
         Optional<Member> optionalMemberEntity = memberRepository.findByEmail(email);
@@ -70,22 +72,26 @@ public class MyOauth2UserService extends DefaultOAuth2UserService {
             return new MyUserDetails(optionalMemberEntity.get());
         }
 
+        Address address = Address.builder()
+                .City("")
+                .street("")
+                .zipcode("")
+                .build();
+
         Member member = memberRepository.save(Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .name(nickName)                                // name 널이라 나중에 바꿔야함
-                .role(Role.USER)
+                .name(name)
+                .role(Role.OAUTH)
+                .phone(null)
+//                .address(null)
+//                .address(Address.builder().City(null).street(null).zipcode(null).build())
+//                .address(new Address("","street","zipcode"))
+                .address(address)
                 .build());
 
-        // Dto 저장 후 컨트롤러 보내서 추가 입력 페이지 이동 -> 재 가입
-//        MemberDto memberDto = MemberDto.builder()
-//                .email(email)
-//                .name(email)
-//                .password(passwordEncoder.encode(password))
-//                .role(Role.USER)
-//                .build();
-//
-//        MemberController
+        // 컨트롤러 보내서 추가 입력 페이지 이동 -> 재 가입
+
 
         // oAuthUsr -> DB비교  없으면 생성
         return new MyUserDetails(member, attributes);

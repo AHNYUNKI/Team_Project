@@ -2,7 +2,6 @@ package com.api.shop_project.domain.member;
 
 import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.Review;
-import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.domain.post.Reply;
@@ -11,12 +10,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Builder
 @AllArgsConstructor

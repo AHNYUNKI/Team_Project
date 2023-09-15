@@ -1,12 +1,13 @@
 package com.api.shop_project.dto.response.member;
 
+import com.api.shop_project.domain.BaseTime;
 import com.api.shop_project.domain.member.Address;
+import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class MemberDto {
+public class MemberDto extends BaseTime{
     private Long id;
 
     private String email;
@@ -76,6 +77,20 @@ public class MemberDto {
 //        this.email = email;
 //        this.address = address;
 //    }
+
+    public static MemberDto toMemberDto(Member member){
+        MemberDto memberDto = new MemberDto();
+        memberDto.setId(member.getId());
+        memberDto.setName(member.getName());
+        memberDto.setEmail(member.getEmail());
+//        memberDto.setPassword(member.getPassword());
+        memberDto.setPhone(member.getPhone());
+        memberDto.setRole(member.getRole());
+        memberDto.setAddress(member.getAddress());
+        memberDto.setCreateTime(member.getCreateTime());
+        memberDto.setUpdateTime(member.getUpdateTime());
+        return memberDto;
+    }
 
 
 

@@ -7,10 +7,13 @@ import com.api.shop_project.dto.response.member.MemberDto;
 import com.api.shop_project.dto.response.member.MemberSave;
 import com.api.shop_project.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -102,24 +105,40 @@ public class MemberService {
         }
 
     @Transactional
-    public int memberUpdate(MemberDto memberDto) {
+    public int memberUpdate(MemberSave memberSave) {
+
+        Address address = Address.builder()
+                .City(memberSave.getCity())
+                .street(memberSave.getStreet())
+                .zipcode(memberSave.getZipcode())
+                .build();
 
         // MemberEntity id확인
         Optional<Member>  optionalMemberEntity=
-                Optional.ofNullable(memberRepository.findById(memberDto.getId()).orElseThrow(() -> {
+                Optional.ofNullable(memberRepository.findById(memberSave.getId()).orElseThrow(() -> {
                     return new IllegalArgumentException("수정할 아이디가 없습니다.");
                 }));
-
         Member memberEntity=
                 Member.builder()
-                        .id(memberDto.getId())
-                        .name(memberDto.getName())
-                        .email(memberDto.getEmail())
-                        .password(passwordEncoder.encode(memberDto.getPassword()))
-                        .phone(memberDto.getPhone())
-                        .address(memberDto.getAddress())
+                        .id(memberSave.getId())
+                        .name(memberSave.getName())
+                        .email(memberSave.getEmail())
+                        .password(passwordEncoder.encode(memberSave.getPassword()))
+                        .phone(memberSave.getPhone())
+                        .address(address)
                         .role(Role.USER)
                         .build();
+
+//        Member memberEntity=
+//                Member.builder()
+//                        .id(memberDto.getId())
+//                        .name(memberDto.getName())
+//                        .email(memberDto.getEmail())
+//                        .password(passwordEncoder.encode(memberDto.getPassword()))
+//                        .phone(memberDto.getPhone())
+//                        .address(memberDto.getAddress())
+//                        .role(Role.USER)
+//                        .build();
 
 
         Long memberId= memberRepository.save(memberEntity).getId();
@@ -155,7 +174,8 @@ public class MemberService {
                     .password(passwordEncoder.encode(memberEntity.getPassword()))
                     .phone(memberEntity.getPhone())
                     .address(memberEntity.getAddress())
-                    .role(Role.USER)
+//                    .role(Role.USER)
+                    .role(memberEntity.getRole())
                     .build();
             return memberDto;
         }
@@ -177,6 +197,8 @@ public class MemberService {
                 .phone(memberEntity.getPhone())
                 .role(memberEntity.getRole())
                 .address(memberEntity.getAddress())
+                .createTime(memberEntity.getCreateTime())
+                .updateTime(memberEntity.getUpdateTime())
                 .build();
     }
 
@@ -204,4 +226,51 @@ public class MemberService {
         return memberDtos;
     }
 
+    public List<MemberDto> searchMemberList(String subject, String search) {
+        List<MemberDto> memberDtos = new ArrayList<>();
+        List<Member> members =new ArrayList<>();
+
+        if (subject.equals("email")){
+            members = memberRepository.findByEmailContaining(search);
+        }else if(subject.equals("name")){
+            members = memberRepository.findByNameContaining(search);
+        }else if(subject.equals("phone")){
+            members = memberRepository.findByPhoneContaining(search);
+        }else {
+            members = memberRepository.findAll();
+        }
+
+        if (!members.isEmpty()){
+            for (Member member : members){
+                MemberDto memberDto = MemberDto.builder()
+                        .id(member.getId())
+                        .name(member.getName())
+                        .email(member.getEmail())
+                        .phone(member.getPhone())
+                        .address(member.getAddress())
+                        .role(member.getRole())
+                        .createTime(member.getCreateTime())
+                        .updateTime(member.getUpdateTime())
+                        .build();
+                memberDtos.add(memberDto);
+            }
+        }
+        return memberDtos;
+    }
+
+    public int emailChecked(String email) throws IOException {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if(!member.isPresent()){
+            return 0;
+        }
+        return 1;
+    }
+
+    public Page<MemberDto> pagingMemberList(Pageable pageable) {
+        Page<Member> members = memberRepository.findAll(pageable);
+
+        Page<MemberDto> memberDtos = members.map(MemberDto::toMemberDto);
+
+        return memberDtos;
+    }
 }
