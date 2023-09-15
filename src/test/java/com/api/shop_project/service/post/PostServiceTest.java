@@ -126,7 +126,7 @@ class PostServiceTest {
         String content = postSave.getContent();
         String writer = postSave.getWriter();
 
-        postService.postInsertDo(title, content, writer);
+        postService.postInsertDo(title, content,writer);
 
 
 

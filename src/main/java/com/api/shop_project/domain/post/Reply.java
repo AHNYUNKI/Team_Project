@@ -20,13 +20,13 @@ public class Reply extends BaseTime {
     @Column(name = "reply_id")
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+//    @Column(nullable = false)
+//    private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String writer;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,4 +36,5 @@ public class Reply extends BaseTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
 }
