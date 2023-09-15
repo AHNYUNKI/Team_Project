@@ -74,7 +74,35 @@
                 <!-- =========================================== -->
                 <div class="section2-con">
                     <div class="section2">
-                        <p>Section2</p>
+                        <div class="sec1">
+                            <ul>
+                                <!-- <li th:each="item:${itemList}"> -->
+                                <li>
+                                    <a th:href="@{/}">
+                                        <div class="itemImg">
+                                            <!-- <img th:src="${item.isFile}" alt="상품이미지">-->
+                                            <img th:src="@{http://placehold.it/200x300}" alt="대체이미지">
+                                        </div>
+                                        
+                                        <div class="itemName">
+                                            <!-- <span th:text=${item.name} ></span>-->
+                                            <span>상품명</span>
+                                        </div>
+
+                                        <div class="itemPrice">
+                                            <!-- <span th:text=${item.price} ></span>-->
+                                            <span>10000원</span>
+                                        </div>
+
+                                        <div class="itemDetail-con">
+                                            <div class="itemDetail">
+                                                <button type="button" th:href="@{/}">상세보기</button>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!-- =========================================== -->

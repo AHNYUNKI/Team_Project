@@ -32,17 +32,17 @@ public class MemberController {
     @GetMapping("/join")
     public String join2(Model model) {
 
-        MemberSave memberSave = new MemberSave();
+        MemberDto member = new MemberDto();
 
-        model.addAttribute("memberSave", memberSave);
+        model.addAttribute("member", member);
 
         return "member/join";
     }
 
     @PostMapping("/join")
-    public String joinPost2(@ModelAttribute MemberSave memberSave){
+    public String joinPost2(@ModelAttribute MemberDto memberDto){
 
-        memberService.insertMember2(memberSave);
+        memberService.insertMember2(memberDto);
 
         return "redirect:/member/login";
     }
@@ -82,9 +82,9 @@ public class MemberController {
 
 
     @PostMapping("/update")
-    public String update(@ModelAttribute MemberSave memberSave) {
+    public String update(@ModelAttribute MemberDto memberDto) {
 
-        int rs = memberService.memberUpdate(memberSave);
+        int rs = memberService.memberUpdate(memberDto);
 
         if (rs == 1) {
             System.out.println("수정 성공!!");
@@ -98,19 +98,19 @@ public class MemberController {
     @GetMapping("/update/{id}")
     public String updateok(@PathVariable("id") Long id, Model model) {
 
-        MemberDto memberdto = memberService.memberUpdateOk(id);
+        MemberDto member = memberService.memberUpdateOk(id);
 
-        MemberSave member = MemberSave.builder()
-                .id(memberdto.getId())
-                .name(memberdto.getName())
-                .email(memberdto.getEmail())
-                .password(memberdto.getPassword())
-                .phone(memberdto.getPhone())
-                .role(memberdto.getRole())
-                .city(memberdto.getAddress().getCity())
-                .street(memberdto.getAddress().getStreet())
-                .zipcode(memberdto.getAddress().getZipcode())
-                .build();
+//        MemberDto member = MemberDto.builder()
+//                .id(memberdto.getId())
+//                .name(memberdto.getName())
+//                .email(memberdto.getEmail())
+//                .password(memberdto.getPassword())
+//                .phone(memberdto.getPhone())
+//                .role(memberdto.getRole())
+//                .city(memberdto.getAddress().getCity())
+//                .street(memberdto.getAddress().getStreet())
+//                .zipcode(memberdto.getAddress().getZipcode())
+//                .build();
 
         if (member != null) {
             model.addAttribute("member", member);
@@ -124,19 +124,19 @@ public class MemberController {
     public String oauth2addok(@AuthenticationPrincipal MyUserDetails myUserDetails, Model model){
         Long memberid = myUserDetails.getMember().getId();
 
-        MemberDto memberdto = memberService.memberUpdateOk(memberid);
+        MemberDto member = memberService.memberUpdateOk(memberid);
 
-        MemberSave member = MemberSave.builder()
-                .id(memberdto.getId())
-                .name(memberdto.getName())
-                .email(memberdto.getEmail())
-                .password(memberdto.getPassword())
-                .phone(memberdto.getPhone())
-                .role(memberdto.getRole())
-                .city(memberdto.getAddress().getCity())
-                .street(memberdto.getAddress().getStreet())
-                .zipcode(memberdto.getAddress().getZipcode())
-                .build();
+//        MemberSave member = MemberSave.builder()
+//                .id(memberdto.getId())
+//                .name(memberdto.getName())
+//                .email(memberdto.getEmail())
+//                .password(memberdto.getPassword())
+//                .phone(memberdto.getPhone())
+//                .role(memberdto.getRole())
+//                .city(memberdto.getAddress().getCity())
+//                .street(memberdto.getAddress().getStreet())
+//                .zipcode(memberdto.getAddress().getZipcode())
+//                .build();
 
         if (member != null) {
             model.addAttribute("member", member);
@@ -147,8 +147,8 @@ public class MemberController {
     }
 
     @PostMapping("/oauth2add")
-    public String oauth2add(@AuthenticationPrincipal MyUserDetails myUserDetails, MemberSave memberSave){
-        int rs = memberService.memberUpdate(memberSave);
+    public String oauth2add(@AuthenticationPrincipal MyUserDetails myUserDetails, MemberDto memberDto){
+        int rs = memberService.memberUpdate(memberDto);
 
         if (rs == 1) {
             System.out.println("수정 성공!!");
