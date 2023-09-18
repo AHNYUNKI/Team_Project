@@ -4,7 +4,6 @@ import com.api.shop_project.domain.member.Address;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.dto.response.member.MemberDto;
-import com.api.shop_project.dto.response.member.MemberSave;
 import com.api.shop_project.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
