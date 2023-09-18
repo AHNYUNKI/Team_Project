@@ -67,13 +67,14 @@
 
 .container-con .sec1>ul{
     padding: 20px;
-}
-
-.container-con .sec1>ul>li{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 30px;
+}
+
+.container-con .sec1>ul>li{
+
 }
 
 .container-con .sec1>ul>li .itemName{

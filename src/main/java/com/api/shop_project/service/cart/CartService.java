@@ -5,6 +5,7 @@ import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.item.Item;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.dto.response.cart.CartFindOne;
+import com.api.shop_project.dto.response.cart.CartResponse;
 import com.api.shop_project.exception.ValueException;
 import com.api.shop_project.repository.Item.ItemRepository;
 import com.api.shop_project.repository.cart.CartItemRepository;
@@ -45,13 +46,15 @@ public class CartService {
                 .build());
     }
 
-    public List<CartItem> cartFindOne(Long memberId) {
+    public List<CartResponse> cartFindOne(Long memberId) {
 
         CartFindOne cartFindOne = new CartFindOne();
 
         cartFindOne.setMemberId(memberId);
 
-         return cartRepository.cartFindOne(cartFindOne);
+        return cartRepository.cartFindOne(cartFindOne);
+
+
 
 
     }

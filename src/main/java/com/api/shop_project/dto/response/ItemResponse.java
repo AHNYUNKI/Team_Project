@@ -7,6 +7,8 @@ import lombok.Getter;
 @Getter
 public class ItemResponse {
 
+    public Long id;
+
     private String name;
 
     private int price;
@@ -14,7 +16,8 @@ public class ItemResponse {
     private Filters filters;
 
     @Builder
-    public ItemResponse(String name, int price, Filters filters) {
+    public ItemResponse(Long id,String name, int price, Filters filters) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.filters = filters;

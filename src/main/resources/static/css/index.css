@@ -152,13 +152,14 @@ img {vertical-align: middle;}
 
 .section2-con .section2 .sec1>ul{
   padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;
 }
 
 .section2-con .section2 .sec1>ul>li{
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 30px;
+
 }
 
 .section2-con .section2 .sec1>ul>li .itemName{

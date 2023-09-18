@@ -1,10 +1,14 @@
 package com.api.shop_project.controller.cart;
 
+import com.api.shop_project.config.MyUserDetails;
 import com.api.shop_project.config.UserPrincipal;
 import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.cart.CartItem;
+import com.api.shop_project.dto.response.cart.CartResponse;
 import com.api.shop_project.service.cart.CartService;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,26 +20,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class CartController {
 
-    private CartService cartService;
+    private final CartService cartService;
 
     @PostMapping("/cart/add")
-    public String addCart(@AuthenticationPrincipal UserPrincipal principal,
+    public String addCart(@AuthenticationPrincipal MyUserDetails principal,
                         @RequestParam Long itemId,
                         @RequestParam int count,
                         @RequestParam int total) {
-        cartService.addCart(principal.getMemberId(), itemId, count, total);
 
-        return "/carts";
+        cartService.addCart(principal.getMember().getId(), itemId, count, total);
+
+        return "/index";
 
     }
 
     @GetMapping("/carts")
     public String cartList(@AuthenticationPrincipal UserPrincipal principal, Model model) {
 
-        List<CartItem> carts = cartService.cartFindOne(principal.getMemberId());
+        List<CartResponse> carts = cartService.cartFindOne(principal.getMemberId());
 
         model.addAttribute("carts", carts);
 

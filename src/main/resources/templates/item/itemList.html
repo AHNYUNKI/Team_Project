@@ -41,22 +41,21 @@
                     <div class="itemList-container">
                         <div class="sec1">
                             <ul>
-<!--                                 <li th:each="item:${itemList}"> -->
-                                <li>
+                                <li th:each="item:${itemList}">
                                     <a th:href="@{/}">
                                         <div class="itemImg">
-<!--                                        <img th:src="${item.isFile}" alt="상품이미지">-->
+                                            <!--                                        <img th:src="${item.isFile}" alt="상품이미지">-->
                                             <img th:src="@{http://placehold.it/200x300}" alt="대체이미지">
                                         </div>
 
                                         <div class="itemName">
-<!--                                        <span th:text=${item.name} ></span>-->
-                                            <span>상품명</span>
+                                            <!--                                        <span th:text=${item.name} ></span>-->
+                                            <span th:text="${item.name}"></span>
                                         </div>
-                                        
+
                                         <div class="itemPrice">
-<!--                                        <span th:text=${item.price} ></span>-->
-                                            <span>10000원</span>
+                                            <!--                                        <span th:text=${item.price} ></span>-->
+                                            <span th:text="${item.price}"></span>
                                         </div>
 
                                         <div class="itemDetail-con">
@@ -66,6 +65,30 @@
                                         </div>
                                     </a>
                                 </li>
+<!--                                <li>-->
+<!--                                    <a th:href="@{/}">-->
+<!--                                        <div class="itemImg">-->
+<!--&lt;!&ndash;                                        <img th:src="${item.isFile}" alt="상품이미지">&ndash;&gt;-->
+<!--                                            <img th:src="@{http://placehold.it/200x300}" alt="대체이미지">-->
+<!--                                        </div>-->
+
+<!--                                        <div class="itemName">-->
+<!--&lt;!&ndash;                                        <span th:text=${item.name} ></span>&ndash;&gt;-->
+<!--                                            <span>상품명</span>-->
+<!--                                        </div>-->
+<!--                                        -->
+<!--                                        <div class="itemPrice">-->
+<!--&lt;!&ndash;                                        <span th:text=${item.price} ></span>&ndash;&gt;-->
+<!--                                            <span>10000원</span>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="itemDetail-con">-->
+<!--                                            <div class="itemDetail">-->
+<!--                                                <button type="button" th:href="@{/item/itemDetail}">상세보기</button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </a>-->
+<!--                                </li>-->
                             </ul>
                         </div>
                     

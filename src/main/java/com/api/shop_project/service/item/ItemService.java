@@ -20,6 +20,7 @@ public class ItemService {
         Item item = itemRepository.findById(itemId).orElseThrow(() -> new RuntimeException("상품 X"));
 
         return ItemResponse.builder()
+                .id(item.getId())
                 .name(item.getName())
                 .price(item.getPrice())
                 .filters(item.getFilters())
@@ -34,6 +35,7 @@ public class ItemService {
 
         for (Item item : all) {
             ItemResponse build = ItemResponse.builder()
+                    .id(item.getId())
                     .name(item.getName())
                     .price(item.getPrice())
                     .filters(item.getFilters())
