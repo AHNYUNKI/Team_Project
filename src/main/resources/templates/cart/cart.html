@@ -58,11 +58,11 @@
                                 <li  >
                                 
                                 <div class="row data">
-                                    <div class="subdiv">
+                                    <div class="subdiv" th:each="carts:${carts}">
                                         <div class="check"><input type="checkbox" name="buy" value="260" checked="" th:onclick="|javascript:basket.checkItem();|">&nbsp;</div>
                                         <div class="img"><img src="./img/cart.jpg" width="60"></div>
                                         <div class="pname">
-                                            <span>상품1</span>
+                                            <td th:text="${carts.name}">
                                         </div>
                                     </div>
                                     <div class="subdiv">

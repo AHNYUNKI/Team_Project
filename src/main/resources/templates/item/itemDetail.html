@@ -50,12 +50,12 @@
                                 <span>샛별배송</span>
                             </div>
                             <div class="sec2">
-                                <!-- <h1 th:text="${item.name}"></h1> -->
-                                <h1>상품명</h1>
+                                <h1 th:text="${item.name}"></h1>
+                                <!--                                <h1>상품명</h1>-->
                             </div>
                             <div class="sec3">
-                                <!-- <span th:text="${item.price}"></span> -->
-                                <span class="one">10000</span>
+                                <span th:text="${item.price}" id="itemPrice"></span>
+                                <!--                                <span class="one">10000</span>-->
                             </div>
                             <div class="sec4">
                                 <ul>
@@ -83,13 +83,13 @@
                                             <button type="button" class="minusBtn" id="decreaseQuantity">▼</button>
                                         </div>
                                     </li>
-                                    
+
                                     <li>
                                         <span>합계금액</span>
-    <div class="sum" id="totalPrice">10000</div>
+                                        <div class="sum" id="totalPrice"></div>
                                     </li>
-
-                                    <button class="cart_btn">장바구니 담기</button>
+                                    <input type="hidden" id="item_id" th:value="${item.id}" />
+                                    <button class="cart_btn" th:onclick="addToCart()">장바구니 담기</button>
                                 </ul>
                             </div>
                         </div>
@@ -112,13 +112,13 @@
                                     </tr>
 
                                     <tbody id="tData">
-                                        <!-- 주석해제후 사용하기 -->
-<!--                                    <tr th:each="reply: ${replyList}">-->
-<!--                                        <td th:text="${reply.id}"></td>-->
-<!--                                        <td th:text="${reply.replyWriter}"></td>-->
-<!--                                        <td th:text="${reply.replyContent}"></td>-->
-<!--                                        <td th:text="${#temporals.format(reply.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-<!--                                    </tr>-->
+                                    <!-- 주석해제후 사용하기 -->
+                                    <!--                                    <tr th:each="reply: ${replyList}">-->
+                                    <!--                                        <td th:text="${reply.id}"></td>-->
+                                    <!--                                        <td th:text="${reply.replyWriter}"></td>-->
+                                    <!--                                        <td th:text="${reply.replyContent}"></td>-->
+                                    <!--                                        <td th:text="${#temporals.format(reply.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+                                    <!--                                    </tr>-->
                                     </tbody>
 
                                 </table>
@@ -129,18 +129,22 @@
                                 <!-- 덧글 작성 -->
 
                                 <form th:action="@{/}" method="post">
-<!--                                <input type="hidden" readonly name="boardId" th:value="${board.id}" id="boardId">-->
+                                    <!--                                <input type="hidden" readonly name="boardId" th:value="${board.id}" id="boardId">-->
                                     <input type="hidden" readonly name="boardId" id="boardId">
                                     <ul>
                                         <li>
-                                            <textarea name="replyContent" style="width: 707px; height: 40px; resize: none; padding: 5px 0;" id="replyContent"
+                                            <textarea name="replyContent"
+                                                      style="width: 707px; height: 40px; resize: none; padding: 5px 0;"
+                                                      id="replyContent"
                                                       placeholder=" 내용작성">
                                             </textarea>
                                         </li>
                                         <li>
-                                            <input type="text" name="replyWriter" id="replyWriter" style="width: 80px; height: 25px; "
-                                            placeholder=" 작성자">
-                                            <input type="button" style="width: 80px; height: 25px; " value="완료" id="ajaxBtn">
+                                            <input type="text" name="replyWriter" id="replyWriter"
+                                                   style="width: 80px; height: 25px; "
+                                                   placeholder=" 작성자">
+                                            <input type="button" style="width: 80px; height: 25px; " value="완료"
+                                                   id="ajaxBtn">
                                         </li>
                                     </ul>
                                 </form>
