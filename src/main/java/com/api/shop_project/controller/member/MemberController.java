@@ -4,7 +4,6 @@ import com.api.shop_project.config.MyOauth2UserService;
 import com.api.shop_project.config.MyUserDetails;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.dto.response.member.MemberDto;
-import com.api.shop_project.dto.response.member.MemberSave;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -36,17 +35,17 @@ public class MemberController {
     @GetMapping("/join")
     public String join2(Model model) {
 
-        MemberSave memberSave = new MemberSave();
+        MemberDto member = new MemberDto();
 
-        model.addAttribute("memberSave", memberSave);
+        model.addAttribute("member", member);
 
         return "member/join";
     }
 
     @PostMapping("/join")
-    public String joinPost2(@ModelAttribute MemberSave memberSave){
+    public String joinPost2(@ModelAttribute MemberDto memberDto){
 
-        memberService.insertMember2(memberSave);
+        memberService.insertMember2(memberDto);
 
         return "redirect:/member/login";
     }
@@ -86,9 +85,9 @@ public class MemberController {
 
 
     @PostMapping("/update")
-    public String update(@ModelAttribute MemberSave memberSave) {
+    public String update(@ModelAttribute MemberDto memberDto) {
 
-        int rs = memberService.memberUpdate(memberSave);
+        int rs = memberService.memberUpdate(memberDto);
 
         if (rs == 1) {
             System.out.println("수정 성공!!");
@@ -104,20 +103,9 @@ public class MemberController {
 
         MemberDto memberdto = memberService.memberUpdateOk(id);
 
-        MemberSave member = MemberSave.builder()
-                .id(memberdto.getId())
-                .name(memberdto.getName())
-                .email(memberdto.getEmail())
-                .password(memberdto.getPassword())
-                .phone(memberdto.getPhone())
-                .role(memberdto.getRole())
-                .city(memberdto.getAddress().getCity())
-                .street(memberdto.getAddress().getStreet())
-                .zipcode(memberdto.getAddress().getZipcode())
-                .build();
 
-        if (member != null) {
-            model.addAttribute("member", member);
+        if (memberdto != null) {
+            model.addAttribute("member", memberdto);
             return "member/update";
         }
 //        return "redirect:/member/memberList";
@@ -128,55 +116,22 @@ public class MemberController {
     public String oauth2addok(@AuthenticationPrincipal MyUserDetails myUserDetails, Model model){
         Long memberid = myUserDetails.getMember().getId();
 
-        MemberDto memberdto = memberService.memberUpdateOk(memberid);
+        MemberDto member = memberService.memberUpdateOk(memberid);
 
-        MemberSave member = MemberSave.builder()
-                .id(memberdto.getId())
-                .name(memberdto.getName())
-                .email(memberdto.getEmail())
-                .password(memberdto.getPassword())
-                .phone(memberdto.getPhone())
-                .role(memberdto.getRole())
-                .city(memberdto.getAddress().getCity())
-                .street(memberdto.getAddress().getStreet())
-                .zipcode(memberdto.getAddress().getZipcode())
-                .build();
+        model.addAttribute("member", member);
 
-        if (member != null) {
-            model.addAttribute("member", member);
-            return "member/oauth2add";
-        }
 
         return "redirect:/index";
     }
 
     @PostMapping("/oauth2add")
-    public String oauth2add(@AuthenticationPrincipal MyUserDetails myUserDetails, MemberSave memberSave){
-        int rs = memberService.memberUpdate(memberSave);
+    public String oauth2add(@AuthenticationPrincipal MyUserDetails myUserDetails, MemberDto memberDto){
+        int rs = memberService.memberUpdate(memberDto);
 
-        if (rs == 1) {
-            System.out.println("수정 성공!!");
-
-
-        } else {
-            System.out.println("수정 실패!!");
-        }
-//        return "redirect:/member/userdata";
 
         return "redirect:/member/login";
     }
 
-//    @GetMapping("/memberList")
-//    public String memberList(Model model){
-//        List<MemberDto> memberList = memberService.findAllList();
-//
-//        if (!memberList.isEmpty()) {
-//            model.addAttribute("memberList", memberList);
-//            return "member/memberList";
-//        }
-//
-//        return "redirect:/index";
-//    }
     @GetMapping("/memberList")
     public String memberList(@PageableDefault(page = 0, size = 5, sort = "id",
     direction = Sort.Direction.DESC) Pageable pageable, Model model) {

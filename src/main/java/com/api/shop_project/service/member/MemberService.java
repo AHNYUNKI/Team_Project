@@ -47,19 +47,19 @@ public class MemberService {
 //    }
 
     @Transactional
-    public void insertMember2(MemberSave memberSave) {
+    public void insertMember2(MemberDto memberDto) {
         Address address = Address.builder()
-                .City(memberSave.getCity())
-                .street(memberSave.getStreet())
-                .zipcode(memberSave.getZipcode())
+                .City(memberDto.getAddress().getCity())
+                .street(memberDto.getAddress().getStreet())
+                .zipcode(memberDto.getAddress().getZipcode())
                 .build();
 
         Long memberId = memberRepository.save(Member.builder()
-                .email(memberSave.getEmail())
-                .password(passwordEncoder.encode(memberSave.getPassword()))
-                .name(memberSave.getName())
+                .email(memberDto.getEmail())
+                .password(passwordEncoder.encode(memberDto.getPassword()))
+                .name(memberDto.getName())
                 .address(address)
-                .phone(memberSave.getPhone())
+                .phone(memberDto.getPhone())
                 .role(Role.USER)
                 .build()).getId();
 
@@ -105,26 +105,26 @@ public class MemberService {
         }
 
     @Transactional
-    public int memberUpdate(MemberSave memberSave) {
+    public int memberUpdate(MemberDto memberDto) {
 
         Address address = Address.builder()
-                .City(memberSave.getCity())
-                .street(memberSave.getStreet())
-                .zipcode(memberSave.getZipcode())
+                .City(memberDto.getAddress().getCity())
+                .street(memberDto.getAddress().getStreet())
+                .zipcode(memberDto.getAddress().getStreet())
                 .build();
 
         // MemberEntity id확인
         Optional<Member>  optionalMemberEntity=
-                Optional.ofNullable(memberRepository.findById(memberSave.getId()).orElseThrow(() -> {
+                Optional.ofNullable(memberRepository.findById(memberDto.getId()).orElseThrow(() -> {
                     return new IllegalArgumentException("수정할 아이디가 없습니다.");
                 }));
         Member memberEntity=
                 Member.builder()
-                        .id(memberSave.getId())
-                        .name(memberSave.getName())
-                        .email(memberSave.getEmail())
-                        .password(passwordEncoder.encode(memberSave.getPassword()))
-                        .phone(memberSave.getPhone())
+                        .id(memberDto.getId())
+                        .name(memberDto.getName())
+                        .email(memberDto.getEmail())
+                        .password(passwordEncoder.encode(memberDto.getPassword()))
+                        .phone(memberDto.getPhone())
                         .address(address)
                         .role(Role.USER)
                         .build();
