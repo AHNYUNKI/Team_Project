@@ -44,6 +44,7 @@ public class MemberController {
 
     @PostMapping("/join")
     public String joinPost2(@ModelAttribute MemberDto memberDto){
+
         memberService.insertMember2(memberDto);
 
         return "redirect:/member/login";

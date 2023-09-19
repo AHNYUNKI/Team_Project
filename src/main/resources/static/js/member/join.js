@@ -60,7 +60,7 @@ $(function(){
 
 			/* 전송 후 세팅 */
 			success: function(result) { //controller에서 return받은 message부분임
-				if(result!=null){
+				if(result == "ok"){
 				    alert("가입 성공");
 					location="/member/login"; //저장이 완료된 이후 이동하는 url
 				}else{
