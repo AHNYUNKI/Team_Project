@@ -31,13 +31,14 @@
                     </div>
 
                     <div class="cart-con-container">
-                        <form name="orderform" id="orderform" method="post" class="orderform" th:action="@{/Page}" onsubmit="return false;">
-    
+                        <form name="orderform" id="orderform" method="post" class="orderform" th:action="@{/Page}"
+                              onsubmit="return false;">
+
                             <input type="hidden" name="cmd" value="order">
                             <div class="basketdiv" id="basket">
                                 <div class="row head">
                                     <div class="subdiv">
-<!--                                        <div class="check">선택</div>-->
+                                        <!--                                        <div class="check">선택</div>-->
                                         <div class="img">이미지</div>
                                         <div class="pname">상품명</div>
                                     </div>
@@ -47,44 +48,54 @@
                                         <div class="sum">합계</div>
                                     </div>
                                     <div class="subdiv">
-                    
                                         <div class="basketcmd">삭제</div>
                                     </div>
+                                    <div class="subdiv">
+                                        <div class="basketcmd">주문</div>
+                                    </div>
                                     <div class="split"></div>
+
                                 </div>
-                                
+
                                 <!-- 나중에 꼭 li에 th:foreach써서 활용하기  -->
                                 <ul>
-                                <li th:each="cart:${carts}">
-                                <div class="row data">
-                                    <div class="subdiv">
-<!--                                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" th:onclick="|javascript:basket.checkItem();|">&nbsp;</div>-->
-                                        <div class="img"><img src="./img/cart.jpg" width="60"></div>
-                                        <div class="pname">
-                                            <span th:text="${cart.name}"></span>
-                                        </div>
-                                    </div>
-                                    <div class="subdiv">
-                                        <div class="basketprice"><span th:text="${cart.price} + ' 원'"></span></div>
-                                        <div class="num">
-                                            <div class="updown">
-                                                <span th:text="${cart.count}"></span>
+                                    <li th:each="cart:${carts}">
+                                        <div class="row data">
+                                            <div class="subdiv">
+                                                <!--                                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" th:onclick="|javascript:basket.checkItem();|">&nbsp;</div>-->
+                                                <div class="img"><img src="./img/cart.jpg" width="60"></div>
+                                                <div class="pname">
+                                                    <span th:text="${cart.name}"></span>
+                                                </div>
+                                            </div>
+                                            <div class="subdiv">
+                                                <div class="basketprice"><span th:text="${cart.price} + ' 원'"></span>
+                                                </div>
+                                                <div class="num">
+                                                    <div class="updown">
+                                                        <span th:text="${cart.count}"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="basketprice">
+                                                    <span th:text="${cart.totalPrice} + ' 원' "></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="subdiv">
+                                                <input type="hidden" id="item_id" th:value="${cart.itemId}"/>
+                                                <input type="hidden" id="count" th:value="${cart.count}"/>
+                                                <div class="basketcmd">
+                                                    <a class="abutton" th:onclick="'deleteItem(\'' + ${cart.itemId} + '\')'">삭제</a>
+                                                </div>
+                                            </div>
+                                            <div class="subdiv">
+                                                <div class="basketcmd">
+                                                    <a class="abutton" th:onclick="'orderItem(\'' + ${cart.itemId} + '\', \'' + ${cart.count} + '\')'">주문</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="basketprice">
-                                            <span th:text="${cart.totalPrice} + ' 원' "></span>
-                                        </div>
-
-                                    </div>
-                                    <div class="subdiv">
-                                        <input type="hidden" id="item_id" th:value="${cart.itemId}" />
-                                        <div class="basketcmd">
-                                            <a class="abutton" th:onclick="deleteItem()">삭제</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
                             </div>
 
 

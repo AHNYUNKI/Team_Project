@@ -183,24 +183,31 @@
     display: flex;
     justify-content: space-between;
     padding: 15px 0;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
     text-align: center;
     align-items: center;
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(1){
-    flex: 1.5;
+    flex: 1;
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(2){
-    flex: 6;
+    flex: 5;
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(3){
-    flex: 1.5;
+    flex: 1;
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(4){
     flex: 2;
 }
 
+.container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(5){
+    flex: 1;
+}
+
+.container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(6){
+    flex: 1;
+}

@@ -101,25 +101,26 @@
                             <thead>
                                 <tr class="th2">
                                     <th>주문번호</th>
-                                    <th>제품사진</th>
+                                    <th>제품이름</th>
+                                    <th>수량</th>
+                                    <th>주문 상태</th>
                                     <th>주문일</th>
-                                    <th>상세보기</th>
+                                    <th>주문 취소</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="order:${orderList}">
+                                <tr th:each="item:${order}">
 
-                                    
-                                    <td th:text="${order.id}"></td>    
+                                    <td th:text="${item.id}"></td>
 
-                                    <!-- 상품이미지가 있을때 보이기 -->
-                                    <td th:if="${order.isFile==1}" style="width:60px">
-                                        <img th:src="@{|/files/${order.fileEntityList.get(0)}|}" alt="제품사진">
-                                    </td>
-                                    <!-- 상품이미지가 없을때 "사진준비중 보이기 -->
-                                    <td th:unless="${order.isFile==1}">사진준비중</td>
+                                    <td th:text="${item.orderItems[0].item.name}"></td>
 
-                                    <td th:text="${order.time}"></td>
+                                    <td th:text="${item.orderItems[0].count}"></td>
+
+                                    <td th:text="${item.orderStatus}"></td>
+
+                                    <td th:text="${item.createTime}"></td>
+
                                     <td><a th:href="@{|/mypage/orderDetail/${order.id}|}">상세보기</a></td>
                                 </tr>
                             </tbody>
