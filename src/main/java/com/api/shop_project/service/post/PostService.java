@@ -1,7 +1,9 @@
 package com.api.shop_project.service.post;
 
+import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.dto.response.post.PostSave;
+import com.api.shop_project.exception.InvalidRequest;
 import com.api.shop_project.exception.PostNotFound;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.post.PostRepository;
@@ -46,19 +48,24 @@ public class PostService {
     }
 
     @Transactional
-    public Post postInsertDo(String title,
-                             String content,
-                             String writer
+    public Post postInsertDo(PostSave postSave,
+//                             String title,
+//                             String content,
+//                             String writer,
+                             String email
                              ) {
 
+//        updateHit1(postSave);
 
+        Member member =
+                (Member) memberRepository.findByName(email).orElseThrow(IllegalArgumentException::new);
 
         Post post = postRepository.save(
                 Post.builder()
-                        .title(title)
-                        .content(content)
-                        .writer(writer)
-//                        .member(postVo.getMember())
+                        .title(postSave.getTitle())
+                        .content(postSave.getContent())
+                        .writer(postSave.getWriter())
+                        .member(member)
                         .build()
         );
 
@@ -66,20 +73,23 @@ public class PostService {
         return post;
     }
 
+
     @Transactional
     public PostSave postDetail(Long id) {
 
-        updateHit(id);
-
-
         Post post =
                 postRepository.findById(id).orElseThrow(PostNotFound::new);
+
+        post.hit();
 
         return PostSave.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .writer(post.getWriter())
+                .member(post.getMember())
+                .hit(post.getHit())
+                .replies(post.getReplies())
                 .createTime(post.getCreateTime())
                 .upDateTime(post.getUpdateTime())
                 .build();
@@ -87,8 +97,9 @@ public class PostService {
     }
 
     @Transactional
-    public int postUpdateOk(PostSave postSave) {
+    public int postUpdateOk(String email, PostSave postSave) {
 
+        Member member = (Member) memberRepository.findByName(email).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
 //        Post post = Post.toupdateOk(postVo);
 
@@ -96,8 +107,12 @@ public class PostService {
                 .id(postSave.getId())
                 .writer(postSave.getWriter())
                 .title(postSave.getTitle())
+                .member(member)
                 .content(postSave.getContent())
+                .hit(postSave.getHit())
                 .build();
+//        Post post = Post.postsave(postSave.getId(), postSave.getTitle(),
+//                postSave.getContent(), postSave.getWriter(), member);
 
 
         Long postId = postRepository.save(post).getId();
@@ -121,6 +136,7 @@ public class PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .writer(post.getWriter())
+                .hit(post.getHit())
                 .createTime(post.getCreateTime())
                 .build();
 
@@ -197,9 +213,15 @@ public class PostService {
 
     }
 
-    public void updateHit(Long id){
-        postRepository.updateHit(id);
+//    public void updateHit(Long id){
+//        postRepository.updateHit(id);
+//    }
+    private void updateHit1(PostSave postSave) {
+        postRepository.updateHit1(postSave);
     }
+
+
+
 
 
     public Page<PostSave> postPagingList2(Pageable pageable, String subject, String search) {
