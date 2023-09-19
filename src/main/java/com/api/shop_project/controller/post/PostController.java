@@ -1,6 +1,7 @@
 package com.api.shop_project.controller.post;
 
 
+import com.api.shop_project.config.MyUserDetails;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.dto.request.reply.ReplySave;
 import com.api.shop_project.dto.response.post.PostSave;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,18 +79,20 @@ public class PostController {
     }
 
     // 글작성
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/postInsert")
-    public String postInsertPost(@RequestParam String title,
-                                 @RequestParam String content,
-                                 @RequestParam String writer,
+    public String postInsertPost(@AuthenticationPrincipal MyUserDetails myUserDetails,
+//                                @RequestParam String title,
+//                                 @RequestParam String content,
+//                                 @RequestParam String writer,
+                                 PostSave postSave,
                                  Model model) {
 
-//        if(bindingResult.hasErrors()){
-//
-//            return "post/postInsert";
-//        }
+        System.out.println("넘어감?");
+        String email = myUserDetails.getUsername();
+//        System.out.println(email);
 
-        Post post = postService.postInsertDo(title, content, writer);
+        Post post = postService.postInsertDo(postSave, email);
 
 //        model.addAttribute("postVo", post);
 
@@ -98,6 +103,8 @@ public class PostController {
     // 게시글 자세히 보기
     @GetMapping("/postDetail/{id}")
     public String postDetail(@PathVariable("id") Long id, Model model) {
+
+
 
         PostSave postSave = postService.postDetail(id);
         model.addAttribute("post", postSave);
@@ -115,9 +122,11 @@ public class PostController {
 
     // update 버튼 클릭시
     @PostMapping("/postUpdateOk")
-    public String postUpdateOk(PostSave postSave, Model model) {
+    public String postUpdateOk(@AuthenticationPrincipal MyUserDetails myUserDetails,
+            PostSave postSave, Model model) {
 
-        int rs = postService.postUpdateOk(postSave);
+        String email = myUserDetails.getUsername();
+        int rs = postService.postUpdateOk(email,postSave);
 
         if (rs == 1) {
             System.out.println("수정성공");
@@ -159,28 +168,28 @@ public class PostController {
     }
 
     // 게시글 검색
-    @GetMapping("/postSearch")
-    public String postSearch(
-            @RequestParam(value = "subject", required = false) String subject,
-            @RequestParam(value = "search", required = false) String search,
-            Model model) {
-
-        System.out.println(subject + " subject");
-        System.out.println(search + " search");
-
-        List<PostSave> postSaves
-                = postService.searchPostList(subject, search);
-
-        if (!postSaves.isEmpty()) {
-            System.out.println("완료");
-            model.addAttribute("postList", postSaves);
-            return "post/postList";
-        }
-
-        System.out.println("조회할 목록이 없다.");
-        return "redirect:/post/postList";
-
-    }
+//    @GetMapping("/postSearch")
+//    public String postSearch(
+//            @RequestParam(value = "subject", required = false) String subject,
+//            @RequestParam(value = "search", required = false) String search,
+//            Model model) {
+//
+//        System.out.println(subject + " subject");
+//        System.out.println(search + " search");
+//
+//        List<PostSave> postSaves
+//                = postService.searchPostList(subject, search);
+//
+//        if (!postSaves.isEmpty()) {
+//            System.out.println("완료");
+//            model.addAttribute("postList", postSaves);
+//            return "post/postList";
+//        }
+//
+//        System.out.println("조회할 목록이 없다.");
+//        return "redirect:/post/postList";
+//
+//    }
 
 
     //    @GetMapping("/pagingList")
