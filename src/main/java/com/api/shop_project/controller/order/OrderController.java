@@ -1,5 +1,6 @@
 package com.api.shop_project.controller.order;
 
+import com.api.shop_project.config.MyUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,14 +23,14 @@ public class OrderController {
     /**
      * 회원 주문 상태 보여주기
      */
-    @GetMapping("/order/{memberId}")
-    public String getOrder(@PathVariable("memberId") Long memberId, Model model) {
+    @GetMapping("/order")
+    public String getOrder(@AuthenticationPrincipal MyUserDetails myUserDetails, Model model) {
 
-        List<Order> order = orderService.findByOne(memberId);
+        List<Order> order = orderService.findByOne(myUserDetails.getMember().getId());
 
         model.addAttribute("order", order);
 
-        return "index";
+        return "mypage/orderList";
 
     }
 
@@ -37,11 +38,11 @@ public class OrderController {
      * 상품 주문
      */
     @PostMapping("/order")
-    public String order(@RequestParam Long memberId,
-                      @RequestParam Long itemId,
-                      @RequestParam int count) {
+    public String order(@AuthenticationPrincipal MyUserDetails myUserDetails,
+                        @RequestParam Long itemId,
+                        @RequestParam int count) {
 
-        orderService.order(memberId, itemId, count);
+        orderService.order(myUserDetails.getMember().getId(), itemId, count);
 
         return "index";
     }
