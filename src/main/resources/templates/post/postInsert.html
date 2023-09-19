@@ -90,14 +90,14 @@
                                         <textarea cols="30" name="content" id="content" rows="5" placeholder="내용"></textarea>
                                     </li>
                                     <li>
-                                        <label th:for="writer">작성자</label>
+                                        <label th:for="writer">닉네임</label>
                                         <textarea cols="30" name="writer" id="writer" ></textarea>
                                     </li>
-                                    <!--                    <li>-->
-                                    <!--                        <label th:for="writer">작성자</label>-->
-                                    <!--                        <input type="text" th:field="*{writer}" th:value="${writer}" readonly>-->
-                                    <!--                    </li>-->
-                                    <!--                    <p th:if="${#fields.hasErrors('writer')}">title error</p>-->
+<!--                                                        <li>-->
+<!--                                                            <label th:for="writer">작성자</label>-->
+<!--                                                            <input type="text" th:field="*{writer}" th:value="${writer}" readonly>-->
+<!--                                                        </li>-->
+<!--                                                        <p th:if="${#fields.hasErrors('writer')}">title error</p>-->
                                     <li>
                                         <input type="reset" value="초기화">
                                         <input type="submit" value="글작성실행">

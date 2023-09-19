@@ -42,6 +42,17 @@
                                 <input type="text" id="writer" name="writer" th:value="${post.writer}" readonly>
                                 <!--                                <input type="text" id="writer" name="writer" readonly>-->
                             </li>
+<!--                            <li>-->
+<!--                                <label th:for="1">1</label>-->
+<!--                                <input type="text" id="1" name="1" th:value="${#authentication.principal.member.email}" readonly>-->
+<!--                                &lt;!&ndash;                                <input type="text" id="writer" name="writer" readonly>&ndash;&gt;-->
+<!--                            </li>-->
+                            <li>
+                                <label th:for="email">이메일</label>
+                                <input type="text" id="email" name="email" th:value="${post.member.email}" readonly>
+                                <!--                                <input type="text" id="writer" name="writer" readonly>-->
+                            </li>
+
 
                             <li>
                                 <label>작성일</label>
@@ -63,10 +74,18 @@
                                 <input type="text" id="content" name="content" th:value="${post.content}" readonly>
                                 <!--                                <input type="textarea" id="content" name="content" readonly>-->
                             </li>
+                            <li>
+                                <label th:for="hit">조회수</label>
+                                <input type="text" id="hit" name="hit" th:value="${post.hit}" readonly>
+                                <!--                                <input type="textarea" id="content" name="content" readonly>-->
+                            </li>
                         </ul>
                         <div class="sec2">
-                            <a th:href="@{/post/postDelete/{id}(id=${post.id})}">삭제</a>
-                            <a th:href="@{/post/postUpdate/{id}(id=${post.id})}">수정</a>
+                            <th:block th:if="${#authentication.principal.member.email == post.member.email}">
+                                <a th:href="@{/post/postDelete/{id}(id=${post.id})}">삭제</a>
+                                <a th:href="@{/post/postUpdate/{id}(id=${post.id})}">수정</a>
+                            </th:block>
+<!--                            </th:block>-->
                             <a th:href="@{/post/postList}">목록</a>
                         </div>
                     </form>
@@ -90,12 +109,20 @@
                             <tr th:each="reply: ${replyList}">
                                 <td th:text="${reply.id}"></td>
                                 <td th:text="${reply.getContent}"></td>
-                                <td th:text="${reply.getWriter}"></td>
-                                <td th:if="${reply.createTime} == null" th:text="${#temporals.format(reply.updateTime,'yyyy-MM-dd HH:mm')}"></td>
-                                <td th:unless="${reply.createTime} == null" th:text="${#temporals.format(reply.createTime,'yyyy-MM-dd HH:mm')}"></td>
-                                <td th:text="${reply.post.getId}"></td>
-                                <td><a th:href="@{/reply/update/{id}(id=${reply.id})}">수정</a></td>
-                                <td><a th:href="@{/reply/delete/{id}(id=${reply.id})}">삭제</a></td>
+                                <td th:text="${reply.member.name}"></td>
+                                <td th:if="${reply.createTime} == null"
+                                    th:text="${#temporals.format(reply.updateTime,'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:unless="${reply.createTime} == null"
+                                    th:text="${#temporals.format(reply.createTime,'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${reply.post.id}"></td>
+                                <th:block th:if="${#authentication.principal.member.email == reply.member.email}">
+                                    <td><a th:href="@{/reply/update/{id}(id=${reply.id})}">수정</a></td>
+                                    <td><a th:href="@{/reply/delete/{id}(id=${reply.id})}">삭제</a></td>
+                                </th:block>
+                                <th:block th:unless="${#authentication.principal.member.email == reply.member.email}">
+                                    <td><span>수정불가</span></td>
+                                    <td><span>삭제불가</span></td>
+                                </th:block>
                             </tr>
                         </table>
 
@@ -106,13 +133,13 @@
                         <!-- 댓글 작성 -->
                         <form th:action="@{/reply/write}" method="post">
                             <!-- 게시글 번호 -->
-                            <input type="hidden" readonly name="postId" th:value="${post.id}" >
-                            <input type="hidden" readonly name="memberId" th:value=1>
+                            <input type="hidden" readonly name="postId" th:value="${post.id}">
+                            <!--                            <input type="hidden" readonly name="memberId" th:value="${post.member.id}">-->
                             <ul>
                                 <li><textarea name="content" style="resize: none" id="content1"
                                               cols="80" rows="2" placeholder="내용작성"></textarea></li>
                                 <li>
-<!--                                    <input type="text" name="replyWriter" placeholder="작성자">-->
+                                    <!--                                    <input type="text" name="replyWriter" placeholder="작성자">-->
                                     <input type="submit" value="댓글작성">
                                 </li>
                             </ul>
