@@ -38,9 +38,9 @@ public class CartController {
     }
 
     @GetMapping("/carts")
-    public String cartList(@AuthenticationPrincipal UserPrincipal principal, Model model) {
+    public String cartList(@AuthenticationPrincipal MyUserDetails principal, Model model) {
 
-        List<CartResponse> carts = cartService.cartFindOne(principal.getMemberId());
+        List<CartResponse> carts = cartService.cartFindOne(principal.getMember().getId());
 
         model.addAttribute("carts", carts);
 
@@ -48,7 +48,7 @@ public class CartController {
     }
 
     @PostMapping("/carts/{itemId}")
-    public String cartCancel(@PathVariable("itemId") Long itemId) {
+    public String cartCancel(@AuthenticationPrincipal MyUserDetails myUserDetails, @PathVariable("itemId") Long itemId) {
 
         cartService.cartCancel(itemId);
 

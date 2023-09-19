@@ -1,5 +1,6 @@
 package com.api.shop_project.service.cart;
 
+import com.api.shop_project.config.MyUserDetails;
 import com.api.shop_project.domain.cart.Cart;
 import com.api.shop_project.domain.cart.CartItem;
 import com.api.shop_project.domain.item.Item;
@@ -52,8 +53,11 @@ public class CartService {
 
         cartFindOne.setMemberId(memberId);
 
-        return cartRepository.cartFindOne(cartFindOne);
+//        return cartRepository.cartFindOne(cartFindOne);
 
+        List<CartResponse> cartResponses = cartRepository.cartFindOne(cartFindOne);
+
+        return cartResponses;
 
 
 
@@ -62,9 +66,7 @@ public class CartService {
     @Transactional
     public void cartCancel(Long itemId) {
 
-        CartItem cartItem = cartItemRepository.findByItemId(itemId).orElseThrow(ValueException::new);
-
-        cartItemRepository.delete(cartItem);
+        cartItemRepository.deleteByItemId(itemId);
 
     }
 }
