@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class PostSave {
@@ -23,15 +23,26 @@ public class PostSave {
 
     private String writer;
 
-    private int hit;
-
     private Member member;
+
+    private int hit;
 
     private LocalDateTime createTime;
 
     private LocalDateTime upDateTime;
 
     private List<Reply> replies;
+
+    public void postsave(Long id, String title, String content, String writer,
+                         Member member, LocalDateTime createTime, LocalDateTime upDateTime) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.member = member;
+        this.createTime = createTime;
+        this.upDateTime = upDateTime;
+    }
 
     public static PostSave toBoardDto(Post post) {
 
@@ -40,11 +51,14 @@ public class PostSave {
         postSave.setTitle(post.getTitle());
         postSave.setContent(post.getContent());
         postSave.setWriter(post.getWriter());
+        postSave.setHit(post.getHit());
+        postSave.setMember(post.getMember());
         postSave.setCreateTime(post.getCreateTime());
         postSave.setUpDateTime(post.getUpdateTime());
 
         return postSave;
     }
+
 
 
 
