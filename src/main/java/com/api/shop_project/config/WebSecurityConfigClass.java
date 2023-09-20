@@ -45,7 +45,7 @@ public class WebSecurityConfigClass {
 //                .antMatchers("/member/**").hasAnyRole("ADMIN","SELLER","USER","OAUTH")
 //                .antMatchers("/member/**").hasAnyRole("ADMIN","USER","SELLER")
                 // ADMIN, SELLER
-                .antMatchers("/post/**").hasAnyRole("ADMIN","SELLER")
+//                .antMatchers("/post/**").hasAnyRole("ADMIN","SELLER")
                 // ADMIN
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 // 모두허용
