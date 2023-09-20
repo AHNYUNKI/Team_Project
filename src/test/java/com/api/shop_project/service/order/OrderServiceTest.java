@@ -73,10 +73,11 @@ class OrderServiceTest {
         int orderCount = 2;
 
         // when
-        Long orderId = orderService.order(memberSave.getId(), itemSave.getId(), orderCount);
+        orderService.order(memberSave.getId(), itemSave.getId(), orderCount);
 
         // then
-        Order order = orderRepository.findById(orderId).get();
+        Long id = orderRepository.findAll().get(0).getId();
+        Order order = orderRepository.findById(id).get();
 
     }
 
@@ -140,9 +141,10 @@ class OrderServiceTest {
 
         int orderCount = 2;
 
-        Long order = orderService.order(memberSave.getId(), itemSave.getId(), orderCount);
+        orderService.order(memberSave.getId(), itemSave.getId(), orderCount);
         // when
-        orderService.cancel(order);
+        Long id = orderRepository.findAll().get(0).getId();
+        orderService.cancel(id);
 
         // then
     }

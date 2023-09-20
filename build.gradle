@@ -75,6 +75,8 @@ dependencies {
 	// mock 테스트 추가
 	testImplementation "org.mockito:mockito-core:3.3.3"
 
+	testCompileOnly "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok"
 }
 
 def querydslDir = "$buildDir/generated/querydsl"

@@ -33,7 +33,7 @@ public class OrderService {
      * 주문 로직
      */
     @Transactional
-    public Long order(Long memberId, Long itemId, int count) {
+    public void order(Long memberId, Long itemId, int count) {
 
         // 회원 id로 회원 정보 가져왔다.
         Member member = memberRepository.findById(memberId).orElseThrow(ValueException::new);
@@ -51,8 +51,6 @@ public class OrderService {
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count, order);
 
         orderItemRepository.save(orderItem);
-
-        return orderRepository.findById(order.getId()).get().getId();
 
     }
 
