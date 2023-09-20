@@ -14,7 +14,7 @@
 </th:block>
 
 <th:block layout:fragment="script">
-<!--    <script th:src="@{/js/mypage/myUpdate.js}" defer ></script>-->
+<!--    <script th:src="@{/js/member/update.js}" defer ></script>-->
 </th:block>
 
 <th:block layout:fragment="container">
@@ -28,7 +28,7 @@
                     <ul>
                         <li>
                             <button type="button">
-                                <a th:href="@{/}">
+                                <a th:href="@{/order/{id}(id=${#authentication.principal.member.id})}">
                                     <ul>
                                         <li>주문내역</li>
                                         <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>
@@ -38,9 +38,10 @@
                         </li>
                         <li>
                             <button type="button">
-                                <a th:href="@{/}">
+<!--                                <a th:href="@{carts/{memberId}(memberId=${#authentication.principal.member.id})}">-->
+                                <a th:href="@{/cart/cart}">
                                     <ul>
-                                        <li>찜한상품</li>
+                                        <li>장바구니</li>
                                         <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>
                                     </ul>
                                 </a>
@@ -56,26 +57,28 @@
                                 </a>
                             </button>
                         </li>
-                        <li>
-                            <button type="button">
-                                <a th:href="@{/}">
-                                    <ul>
-                                        <li>상품후기</li>
-                                        <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>
-                                    </ul>
-                                </a>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <a th:href="@{/}">
-                                    <ul>
-                                        <li>상품문의</li>
-                                        <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>
-                                    </ul>
-                                </a>
-                            </button>
-                        </li>
+
+<!--                        <li>-->
+<!--                            <button type="button">-->
+<!--                                <a th:href="@{/}">-->
+<!--                                    <ul>-->
+<!--                                        <li>상품후기</li>-->
+<!--                                        <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>-->
+<!--                                    </ul>-->
+<!--                                </a>-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <button type="button">-->
+<!--                                <a th:href="@{/}">-->
+<!--                                    <ul>-->
+<!--                                        <li>상품문의</li>-->
+<!--                                        <li><img th:src="@{/images/arrow_r.png}" alt="이동"></li>-->
+<!--                                    </ul>-->
+<!--                                </a>-->
+<!--                            </button>-->
+<!--                        </li>-->
+
                         <li>
                             <button type="button">
                                 <a th:href="@{/member/update}">
@@ -131,23 +134,28 @@
                                 <label th:for="email">이메일</label>
                                 <input type="email" th:field="*{member.email}" th:value="${member.email}" readonly class="readonly">
                             </li>
+<!--                            <li>-->
+<!--                                <label th:for="password">비밀번호<span>*</span></label>-->
+<!--                                <input type="password" id="old_pw" th:field="*{member.password}" th:value="${member.password}" placeholder=" 비밀번호를 입력해 주세요"-->
+<!--                                       onfocus="this.placeholder=''" onblur="this.placeholder='  비밀번호를 입력해 주세요'">-->
+<!--                            </li>-->
                             <li>
-                                <label th:for="password">새 비밀번호</label>
-                                <input type="password" th:field="*{member.password}" th:value="${member.password}" placeholder=" 비밀번호를 입력해 주세요"
-                                       onfocus="this.placeholder=''" onblur="this.placeholder='  비밀번호를 입력해 주세요'">
+                                <label th:for="password">새 비밀번호<span>*</span></label>
+                                <input type="password" id="new_pw" th:field="*{member.password}" th:value="${member.password}" placeholder="새 비밀번호를 입력해 주세요"
+                                       onfocus="this.placeholder=''" onblur="this.placeholder='  새 비밀번호를 입력해 주세요'">
                             </li>
 
                             <li>
-                                <label th:for="phone">전화번호</label>
+                                <label th:for="phone">전화번호<span>*</span></label>
                                 <input type="text" th:field="*{member.phone}" th:value="${member.phone}" placeholder=" 숫자만 입력해 주세요"
                                        onfocus="this.placeholder=''" onblur="this.placeholder='  숫자만 입력해 주세요'">
 
                             </li>
                             <li>
                                 <label th:for="address">
-                                    주소
+                                    주소<span>*</span>
                                 </label>
-                                <input type="text" th:field="*{member.city}" th:value="${member.city}" placeholder=" 변경된 주소를 입력해 주세요"
+                                <input type="text" th:field="*{member.address.city}" th:value="${member.address.city}" placeholder=" 변경된 주소를 입력해 주세요"
                                        onfocus="this.placeholder=''" onblur="this.placeholder='  변경된 주소를 입력해 주세요'">
                             </li>
 
