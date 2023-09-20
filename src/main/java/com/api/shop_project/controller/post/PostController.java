@@ -29,6 +29,7 @@ public class PostController {
     private final ReplyService replyService;
 
     // 공지사항 목록
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_SELLER')")
     @GetMapping({"", "/postList"})
     public String post(@PageableDefault(page = 0, size = 10, sort = "id",
             direction = Sort.Direction.DESC) Pageable pageable,
