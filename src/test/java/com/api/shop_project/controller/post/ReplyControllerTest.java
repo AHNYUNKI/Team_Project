@@ -198,7 +198,7 @@ public class ReplyControllerTest {
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
+        Reply reply = replyService.replyInsert(post.getId(), replySave.getContent(), member.getEmail());
 
 
         // when
@@ -255,7 +255,7 @@ public class ReplyControllerTest {
                 .member(member)
                 .build();
 
-        Reply reply = replyService.replyInsert(member.getId(), post.getId(), replySave.getContent());
+        Reply reply = replyService.replyInsert(post.getId(), replySave.getContent(), member.getEmail());
 
         //
         mockMvc.perform(post("/reply/delete/{id}", 1L))

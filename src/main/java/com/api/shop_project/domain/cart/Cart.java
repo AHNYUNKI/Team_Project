@@ -22,7 +22,8 @@ public class Cart {
     @Column(name = "cart_id")
     private Long id;
 
-    @OneToOne(mappedBy = "cart", cascade = REMOVE)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "cart", cascade = ALL)

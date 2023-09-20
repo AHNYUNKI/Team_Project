@@ -77,7 +77,7 @@
                         <div class="sec1">
                             <ul>
                                 <li th:each="items:${item}">
-                                    <a th:href="@{/item/itemDetails/{id}(id=${item.id})}">
+                                    <a th:href="@{/item/itemDetails/{id}(id=${items.id})}">
                                         <div class="itemImg">
                                             <!-- <img th:src="${item.isFile}" alt="상품이미지">-->
                                             <img th:src="@{http://placehold.it/200x300}" alt="대체이미지">
@@ -95,7 +95,7 @@
 
                                         <div class="itemDetail-con">
                                             <div class="itemDetail">
-                                                <button type="button" th:href="@{/item/itemDetails/{itemId}(itemId=${item.id})}">상세보기</button>
+                                                <button type="button" th:href="@{/item/itemDetails/{itemId}(itemId=${items.id})}">상세보기</button>
                                             </div>
                                         </div>
                                     </a>

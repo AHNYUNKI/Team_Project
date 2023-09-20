@@ -1,7 +1,6 @@
 package com.api.shop_project.domain.item;
 
 import com.api.shop_project.domain.cart.CartItem;
-import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.OrderItem;
 import com.api.shop_project.exception.NotEnoughStockException;
 import lombok.AllArgsConstructor;
@@ -36,9 +35,6 @@ public abstract class Item {
 
     @Enumerated(value = EnumType.STRING)
     private Filters filters;
-
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();

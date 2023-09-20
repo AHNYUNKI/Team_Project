@@ -1,8 +1,6 @@
 package com.api.shop_project.domain.member;
 
 import com.api.shop_project.domain.BaseTime;
-import com.api.shop_project.domain.cart.Cart;
-import com.api.shop_project.domain.Review;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.domain.post.Post;
 import com.api.shop_project.domain.post.Reply;
@@ -14,8 +12,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Builder
 @AllArgsConstructor
@@ -54,12 +50,5 @@ public class Member extends BaseTime {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
-
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 
 }
