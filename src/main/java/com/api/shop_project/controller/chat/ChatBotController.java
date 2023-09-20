@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Controller
 /*@RequestMapping("/chat")*/
@@ -63,11 +64,17 @@ public class ChatBotController {
         LocalDateTime today = LocalDateTime.now();
         String formattedtime = today.format(DateTimeFormatter.ofPattern("a H:mm"));
 
-        String responseText = message.getContent() + " 대한 답장입니다.";
+        String responseText = "";
 
-        //        if(responseText.contains("영화")){
-        //
-//        }
+        if(Objects.equals(message.getContent(), "환불")){
+            responseText = message.getContent() + " 은 수령 이후 7영업일 이전까지 가능합니다.";
+        } else if(Objects.equals(message.getContent(), "결제취소")){
+            responseText = message.getContent() + " 는 배송시작 이전까지 가능합니다.";
+        } else if(Objects.equals(message.getContent(), "배송")){
+            responseText = message.getContent() + " 는 발송 이후 3~5일 이내입니다.";
+        } else{
+            responseText = message.getContent() + " 대한 답장입니다.";
+        }
 
         return new BotMessage(
                 "<div class='msg bot flex'>"+
