@@ -168,6 +168,7 @@
     border-bottom: 1px solid black;
 }
 
+/* */
 .container-con .orderList .orderList-con .orderList-container table{
     width: 100%;
 }
@@ -180,7 +181,6 @@
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2{
     box-sizing: border-box;
-    display: flex;
     justify-content: space-between;
     padding: 15px 0;
     border-bottom: 1px solid black; 
@@ -189,18 +189,25 @@
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(1){
-    flex: 1.5;
+    width: 10%
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(2){
-    flex: 6;
+    width: 30%
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(3){
-    flex: 1.5;
+    width: 20%
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(4){
-    flex: 2;
+    width: 20%
 }
 
+.container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(5){
+    width: 10%
+}
+
+.container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(6){
+    width: 10%
+}
