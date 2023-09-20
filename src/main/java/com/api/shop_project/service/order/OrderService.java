@@ -96,7 +96,9 @@ public class OrderService {
         orderFindOne.setMemberId(memberId);
         orderFindOne.setOrderStatus(OrderStatus.ORDER);
 
-        return orderRepository.findOne(orderFindOne);
+        List<Order> one = orderRepository.findOne(orderFindOne);
+
+        return one;
 
     }
 }

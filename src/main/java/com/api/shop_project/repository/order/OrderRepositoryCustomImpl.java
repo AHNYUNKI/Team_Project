@@ -31,7 +31,8 @@ public class OrderRepositoryCustomImpl implements OrderRepositoryCustom {
         return query.select(order)
                 .from(order)
                 .join(order.member, member)
-                .where(statusEq(orderFindOne.getOrderStatus()), idLike(orderFindOne.getMemberId()))
+//                .where(statusEq(orderFindOne.getOrderStatus()), idLike(orderFindOne.getMemberId()))
+                .where(order.orderStatus.eq(orderFindOne.getOrderStatus()), order.member.id.eq(orderFindOne.getMemberId()))
                 .limit(1000)
                 .fetch();
 

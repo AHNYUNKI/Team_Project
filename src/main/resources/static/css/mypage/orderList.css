@@ -183,7 +183,7 @@
     box-sizing: border-box;
     justify-content: space-between;
     padding: 15px 0;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
     text-align: center;
     align-items: center;
 }
@@ -204,6 +204,7 @@
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(3){
     width: 20%
+
 }
 
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(4){
@@ -214,7 +215,7 @@
     width: 10%
 }
 
+
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(6){
     width: 10%
-
 }

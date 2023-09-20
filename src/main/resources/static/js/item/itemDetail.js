@@ -32,13 +32,21 @@
         }
     });
 
-    // 장바구니에 담기 버튼 클릭 시 실행되는 함수
-    var cartButton = document.querySelector(".cart_btn");
+    // // 장바구니에 담기 버튼 클릭 시 실행되는 함수
+    // var cartButton = document.querySelector(".cart_btn");
+    //
+    // // 버튼에 클릭 이벤트 리스너를 추가합니다.
+    // cartButton.addEventListener("click", addToCart);
 
-    // 버튼에 클릭 이벤트 리스너를 추가합니다.
-    cartButton.addEventListener("click", addToCart);
+    var isAddingToCart = false;
 
     function addToCart() {
+        if (isAddingToCart) {
+            return;
+        }
+
+        isAddingToCart = true;
+
         var quantity = parseInt(quantityInput.value);
         var totalPrice = parseInt(totalPriceElement.innerText.replace(/[^0-9]/g, '')); // "원" 및 천 단위 구분 기호(,) 제거
 
@@ -55,6 +63,7 @@
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
+                            isAddingToCart = false;
                             // 성공적으로 처리된 경우, 여기에서 필요한 동작을 수행합니다.
                             alert('장바구니에 상품이 추가되었습니다.');
                         } else {
@@ -65,24 +74,8 @@
                 };
 
                 // 요청을 보냅니다.
-                // xhr.send();
+                xhr.send();
 
-                // var cartItem = {
-                //     productId: productId,
-                //     quantity: quantity,
-                //     totalPrice: totalPrice
-                // };
-
-                // 장바구니 데이터를 관리하는 배열 또는 객체에 cartItem을 추가합니다.
-                // 이 배열 또는 객체는 장바구니 정보를 저장하고 관리하는 데 사용됩니다.
-                // 예를 들면:
-                // var shoppingCart = [];
-                // shoppingCart.push(cartItem);
-
-                // 장바구니에 상품을 추가한 후, 필요한 동작을 수행합니다.
-                // 예를 들면, 장바구니 아이콘 업데이트, 장바구니 목록 표시 등을 수행할 수 있습니다.
-
-                // 장바구니 페이지로 이동합니다. 이동할 페이지 URL을 지정하세요.
                 window.location.href = "/"; // 실제 페이지 URL로 변경하세요.
             } else {
                 alert("상품을 올바르게 선택하세요.");
