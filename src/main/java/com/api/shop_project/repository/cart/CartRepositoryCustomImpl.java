@@ -24,12 +24,12 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom{
 
     private final JPAQueryFactory query;
 
+    /**
+     * QueryDSL -> 매핑된 엔티티에서 원하는 정보만 가져오기 위해 사용(성능 N+1 해결)
+     *             (상품 ID, 상품 이름, 장바구니에 담을 상품 총 개수, 상품 가격, 장바구니에 담은 가격 총합)
+     */
     @Override
     public List<CartResponse> cartFindOne(CartFindOne cartFindOne) {
-        if (cartFindOne == null) {
-            // Handle the case where cartFindOne is null
-            return Collections.emptyList(); // Or throw an exception or handle it based on your requirement
-        }
 
         QCartItem cartItem = QCartItem.cartItem;
         QCart cart = QCart.cart;
@@ -52,7 +52,7 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom{
 
         List<CartResponse> cartResponses = new ArrayList<>();
 
-        for (Tuple tuple : queryResults) {
+        queryResults.forEach(tuple -> {
             CartResponse cartResponse = new CartResponse();
             cartResponse.setItemId(tuple.get(item.id));
             cartResponse.setName(tuple.get(item.name));
@@ -60,7 +60,7 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom{
             cartResponse.setPrice(tuple.get(item.price));
             cartResponse.setTotalPrice(tuple.get(cartItem.totalPrice.sum()));
             cartResponses.add(cartResponse);
-        }
+        });
 
         return cartResponses;
 

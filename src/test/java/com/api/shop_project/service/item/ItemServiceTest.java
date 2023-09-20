@@ -45,7 +45,7 @@ class ItemServiceTest {
                         .filters(Filters.MAN)
                         .name("옷 "+i)
                         .price(10000+i)
-                        .stockQuantity(10)
+                        .stockQuantity(1000)
                         .top_Size("95")
                         .build()).collect(Collectors.toList());
 
