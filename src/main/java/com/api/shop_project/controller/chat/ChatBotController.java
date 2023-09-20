@@ -5,14 +5,20 @@ import com.api.shop_project.dto.response.chat.BotMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
-@RequestMapping("/chat")
+/*@RequestMapping("/chat")*/
 public class ChatBotController {
+
+    @GetMapping("/chat")
+    public String chat(){
+        return "chat/chat-bot";
+    }
 
     @MessageMapping("/hello") // /app/hello
     @SendTo("/topic/greetings")
@@ -25,21 +31,21 @@ public class ChatBotController {
 
         // 처음 실행 되는 -> 답장문
         return new BotMessage(
-                "<div class='flex center'>" + formattedDay + "</div>" +
+                "<div class='flex center date'>" + formattedDay + "</div>" +
                         "<div class='msg bot flex'>" +
                         "<div class='icon'>" +
-                        "<img src='/img/chat.png'   th:alt=\"#{chat}\" />" +
+                        "<img src='/images/kurlylogo.jpg'   th:alt=\"#{chat}\" />" +
                         "</div>" +
                         "<div class='message'>" +
                         "<div class='part'>" +
-                        "<p style='text-align:center'>안녕하세요, 챗봇입니다. <br> 상담 내용을 작성해주세요." +
+                        "<p style='text-align:center'>안녕하세요. 1대1 상담입니다.. <br> 상담 내용을 작성해주세요." +
                         "</div>" +
                         "<div class='part'>" +
-                        "<p>아래는 자주하는 질문 내용을 클릭해 주세요.</p>" +
+                        "<p>자주하는 질문</p>" +
                         "<div class='flex center menu'>" +
-                        "<div class='menu-item'><span onclick='menuclickFn(event)'>상품문의</span></div>" +
-                        "<div class='menu-item'><span onclick='menuclickFn(event)'>결제문의</span></div>" +
-                        "<div class='menu-item'><span onclick='menuclickFn(event)'>배송문의</span></div>" +
+                        "<div class='menu-item'><span onclick='menuclickFn(event)'>환불</span></div>" +
+                        "<div class='menu-item'><span onclick='menuclickFn(event)'>결제취소</span></div>" +
+                        "<div class='menu-item'><span onclick='menuclickFn(event)'>배송</span></div>" +
                         "</div>" +
                         "</div>" +
                         "<div class='time'>" +
@@ -66,7 +72,7 @@ public class ChatBotController {
         return new BotMessage(
                 "<div class='msg bot flex'>"+
                         "<div class='icon'>"+
-                        "<img src='/img/chat.png'   th:alt=\"#{chat}\" />" +
+                        "<img src='/images/kurlylogo.jpg'   th:alt=\"#{chat}\" />" +
                         "</div>"+
                         "<div class='message'>"+
                         "<div class='part'>"+

@@ -29,11 +29,14 @@ public class ReplyService {
 
 
     @Transactional
-    public Reply replyInsert(Long memberId, Long postId, String content) {
+    public Reply replyInsert(Long postId, String content, String email) {
+
+
 
         ReplySave replySave = new ReplySave();
 
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
+//        Member member1 = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
+        Member member = (Member) memberRepository.findByName(email).orElseThrow(()-> new IllegalArgumentException("이메일 찾을 수 없습니다."));
 
         Post post = postRepository.findById(postId).orElseThrow(PostNotFound::new);
 
@@ -104,6 +107,7 @@ public class ReplyService {
                     .id(reply.getId())
                     .content(reply.getContent())
                     .writer(reply.getWriter())
+                    .member(reply.getMember())
                     .post(reply.getPost())
                     .createTime(reply.getCreateTime())
                     .updateTime(reply.getUpdateTime())
@@ -118,9 +122,9 @@ public class ReplyService {
 
 
     @Transactional
-    public Reply replyUpdateOk(Long replyId, Long memberId, Long postId, String content) {
+    public Reply replyUpdateOk(String email, Long replyId, Long memberId, Long postId, String content) {
 
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
+        Member member = (Member) memberRepository.findByName(email).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 

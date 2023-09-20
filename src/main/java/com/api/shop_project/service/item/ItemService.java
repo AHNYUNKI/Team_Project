@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,20 +30,16 @@ public class ItemService {
     }
 
     public List<ItemResponse> itemList() {
-        List<ItemResponse> itemResponses = new ArrayList<>();
+        List<ItemResponse> itemResponses;
 
         List<Item> all = itemRepository.findAll();
 
-        for (Item item : all) {
-            ItemResponse build = ItemResponse.builder()
-                    .id(item.getId())
-                    .name(item.getName())
-                    .price(item.getPrice())
-                    .filters(item.getFilters())
-                    .build();
-
-            itemResponses.add(build);
-        }
+        itemResponses = all.stream().map(item -> ItemResponse.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .price(item.getPrice())
+                .filters(item.getFilters())
+                .build()).collect(Collectors.toList());
 
         return itemResponses;
     }
