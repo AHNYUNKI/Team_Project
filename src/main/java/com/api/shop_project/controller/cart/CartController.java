@@ -39,7 +39,9 @@ public class CartController {
 
     @GetMapping("/carts")
     public String cartList(@AuthenticationPrincipal MyUserDetails principal, Model model) {
-
+        if (principal == null) {
+            return "/loginError";
+        }
         List<CartResponse> carts = cartService.cartFindOne(principal.getMember().getId());
 
         model.addAttribute("carts", carts);

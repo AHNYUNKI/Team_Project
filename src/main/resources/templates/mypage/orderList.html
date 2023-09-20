@@ -15,6 +15,7 @@
 
 <th:block layout:fragment="script">
     <!--    <script th:src="@{/js/index.js}" defer ></script>-->
+    <script type="text/javascript" th:src="@{/js/mypage/orderList.js}" defer> </script>
 </th:block>
 
 <th:block layout:fragment="container">
@@ -120,6 +121,10 @@
                                     <td th:text="${item.orderStatus}"></td>
 
                                     <td th:text="${item.createTime}"></td>
+
+                                    <td>
+                                        <button class="cancel" th:onclick="'cancel(\'' + ${item.id} + '\')'">주문 취소</button>
+                                    </td>
 
                                 </tr>
                             </tbody>

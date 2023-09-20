@@ -7,7 +7,8 @@ function deleteItem(itemId) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 // 삭제 성공 시 실행할 코드를 여기에 작성합니다.
-                console.log('삭제 성공!');
+                console.error('삭제 성공!');
+                window.location.reload();
             } else {
                 // 삭제 실패 시 실행할 코드를 여기에 작성합니다.
                 console.error('삭제 실패: ' + xhr.status);
@@ -23,6 +24,8 @@ function deleteItem(itemId) {
 
     // AJAX 요청을 전송합니다.
     xhr.send();
+
+
 }
 
 function orderItem(itemId, count) {
@@ -34,11 +37,11 @@ function orderItem(itemId, count) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 // 주문 성공 시 실행할 코드를 여기에 작성합니다.
-                console.log('주문 성공!');
+                alert('주문 성공!');
                 deleteItem(itemId);
             } else {
                 // 주문 실패 시 실행할 코드를 여기에 작성합니다.
-                console.error('주문 실패: ' + xhr.status);
+                alert('주문 실패: ' + xhr.status);
             }
         }
     };
