@@ -15,43 +15,37 @@
 </th:block>
 
 <th:block layout:fragment="container">
-            <div class="postList">
-                <div class="postList-con">
+    <div class="postList">
+        <div class="postList-con">
 
-                    <div class="postList-header">
-                        <h1>공지사항</h1>
-                        <h4>컬리의 새로운 소식들과 유용한 정보들을한곳에서 확인해 보세요 </h4>
-                    </div>
-
-
-                    <div class="chat">
-                        <div id="chat-bot">
-                            <div class="wrap">
-                                <button type="button" id="btn-chat-open" onclick="openChat()">
-                                    여기를 클릭해 주세요!
-                                </button>
-                                <dl id="chat-disp">
-                                    <dt id="chat-header">
-                                        <span>온라인 채팅 상담</span>
-                                        <span class="btn-wrap">
+            <div class="chat">
+                <div id="chat-bot">
+                    <div class="wrap">
+                        <button type="button" id="btn-chat-open" onclick="openChat()">
+                            여기를 클릭해 주세요!
+                        </button>
+                        <dl id="chat-disp">
+                            <dt id="chat-header">
+                                <span>온라인 채팅 상담</span>
+                                <span class="btn-wrap">
                         <button type="button" id="btn-chat-close" onclick="disconnect()">X</button>
                     </span>
-                                    </dt>
-                                    <dd id="chat-content">
+                            </dt>
+                            <dd id="chat-content">
 
-                                    </dd>
-                                    <dd id="chat-question" class="flex between">
-                                        <span class="flex column center"><i></i></span>
-                                        <input type="text" id="question" placeholder="질문을 입력하세요.">
-                                        <button type="button" id="btn-msg-send" onclick="msgSendClickFn()">전송</button>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                        </div>
+                            </dd>
+                            <dd id="chat-question" class="flex between">
+                                <span class="flex column center"><i></i></span>
+                                <input type="text" id="question" placeholder="질문을 입력하세요.">
+                                <button type="button" id="btn-msg-send" onclick="msgSendClickFn()">전송</button>
+                            </dd>
+                        </dl>
                     </div>
+
                 </div>
             </div>
+        </div>
+    </div>
 
 </th:block>
 </html>

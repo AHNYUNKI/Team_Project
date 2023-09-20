@@ -31,7 +31,15 @@
     /* position: fixed;
      top:0;
      z-index: 1000;*/
+    font-size: 21px;
+    border: none;
+    background-color: #ffffff;
 }
+#btn-chat-open:hover{
+    color: yellowgreen;
+
+}
+
 #chat-bot>.wrap>#chat-disp{
     display: none;
     width: 400px;
