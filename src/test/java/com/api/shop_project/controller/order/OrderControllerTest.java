@@ -1,14 +1,17 @@
 package com.api.shop_project.controller.order;
 
+import com.api.shop_project.config.ShopMocUser;
 import com.api.shop_project.domain.item.Filters;
 import com.api.shop_project.domain.item.Top;
 import com.api.shop_project.domain.member.Member;
 import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.repository.Item.ItemRepository;
+import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.order.OrderItemRepository;
 import com.api.shop_project.repository.order.OrderRepository;
 import com.api.shop_project.service.order.OrderService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -52,31 +56,18 @@ class OrderControllerTest {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-
     @BeforeEach
     void clean() {
-        memberRepository.deleteAll();
-        itemRepository.deleteAll();
         orderRepository.deleteAll();
+        itemRepository.deleteAll();
         orderItemRepository.deleteAll();
     }
 
-
-
     @Test
+    @ShopMocUser
     @DisplayName("/order 요청시 주문을 한다.")
     public void test1() throws Exception {
         // given
-        Member member = Member.builder()
-                .email("user1@gmail.com")
-                .name("user")
-                .password("1111")
-                .phone("010-1111-1111")
-                .role(Role.USER)
-                .build();
-
-        Member memberSave = memberRepository.save(member);
-
         Top top = Top.builder()
                 .filters(Filters.MAN)
                 .name("옷1")
@@ -89,28 +80,18 @@ class OrderControllerTest {
 
         // expected
         mockMvc.perform(post("/order")
-                        .param("memberId", String.valueOf(memberSave.getId()))
                         .param("itemId", String.valueOf(itemSave.getId()))
                         .param("count", "3"))
                 .andExpect(status().isOk())
-//                .andExpect(content().string(""))
                 .andDo(print());
 
     }
 
     @Test
+    @ShopMocUser
     @DisplayName("회원의 주문정보를 확인하고 싶다.")
     public void test2() throws Exception {
         // given
-        Member member = Member.builder()
-                .email("user@gmail.com")
-                .name("user")
-                .password("1111")
-                .phone("010-1111-1111")
-                .role(Role.USER)
-                .build();
-
-        Member memberSave = memberRepository.save(member);
 
         Top top = Top.builder()
                 .filters(Filters.MAN)
@@ -122,10 +103,10 @@ class OrderControllerTest {
 
         Top itemSave = itemRepository.save(top);
 
-        orderService.order(memberSave.getId(), itemSave.getId(), 3);
+        orderService.order(1L, itemSave.getId(), 3);
 
         // expected
-        mockMvc.perform(get("/order/{memberId}", memberSave.getId()))
+        mockMvc.perform(get("/order"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
