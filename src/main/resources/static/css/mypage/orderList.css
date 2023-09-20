@@ -188,6 +188,12 @@
     align-items: center;
 }
 
+.container-con .orderList .orderList-con .orderList-container table tbody tr td{
+    padding: 10px 0;
+    text-align: center;
+    align-items: center;
+}
+
 .container-con .orderList .orderList-con .orderList-container table thead .th2 th:nth-child(1){
     width: 10%
 }
