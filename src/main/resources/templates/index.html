@@ -76,7 +76,7 @@
                     <div class="section2">
                         <div class="sec1">
                             <ul>
-                                <li th:each="item:${itemList}">
+                                <li th:each="items:${item}">
                                     <a th:href="@{/item/itemDetails/{id}(id=${item.id})}">
                                         <div class="itemImg">
                                             <!-- <img th:src="${item.isFile}" alt="상품이미지">-->
@@ -85,12 +85,12 @@
 
                                         <div class="itemName">
                                             <!-- <span th:text=${item.name} ></span>-->
-                                            <span th:text="${item.name}"></span>
+                                            <span th:text="${items.name}"></span>
                                         </div>
 
                                         <div class="itemPrice">
                                             <!-- <span th:text=${item.price} ></span>-->
-                                            <span th:text="${item.price}"></span>
+                                            <span th:text="${items.price}"></span>
                                         </div>
 
                                         <div class="itemDetail-con">
