@@ -84,9 +84,6 @@ public class MyOauth2UserService extends DefaultOAuth2UserService {
                 .name(name)
                 .role(Role.OAUTH)
                 .phone(null)
-//                .address(null)
-//                .address(Address.builder().City(null).street(null).zipcode(null).build())
-//                .address(new Address("","street","zipcode"))
                 .address(address)
                 .build());
 

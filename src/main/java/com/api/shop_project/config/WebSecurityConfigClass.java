@@ -39,13 +39,9 @@ public class WebSecurityConfigClass {
                 // 로그인시
                 .antMatchers("/member/logout").authenticated()
                 // OAUTH 정보 추가 페이지
-//                .antMatchers("/member/oauth2add").hasAnyRole("OAUTH")
                 // USER, ADMIN , SELLER
                 .antMatchers("/member/**").permitAll()
-//                .antMatchers("/member/**").hasAnyRole("ADMIN","SELLER","USER","OAUTH")
-//                .antMatchers("/member/**").hasAnyRole("ADMIN","USER","SELLER")
                 // ADMIN, SELLER
-//                .antMatchers("/post/**").hasAnyRole("ADMIN","SELLER")
                 // ADMIN
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 // 모두허용
@@ -93,21 +89,6 @@ public class WebSecurityConfigClass {
                 .clearAuthentication(true) // 로그아웃 시 권한 제거
                 .logoutSuccessUrl("/")
         ;
-        
-//        // 세션 설정
-//        http.sessionManagement(
-//                // sessionCreationPolicy는 세션의 생성 정책 , 보통 ALWAYS (항상 생성) , STATELESS (모든 요청에 대해 세션을 생성하지 않음) 두가지로 설정
-//                s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                        // sessionFixation() : 세션의 생성 방식, changeSessionId() : 인증마다 새로운 세션아이디 발급 . 다른 세션 속성은 유지
-//                        .sessionFixation(sf ->sf.changeSessionId())
-//        // 동시 접속 문제 해결를 위한 속성
-//                        // maximumSession() : 유저가 갖을 수 있는 세션의 갯수
-//                        .maximumSessions(1)
-//                        // maxSessionsPreventsLogin() : 사용자 수를 초과시 상황을 정의
-//                        // true 일 경우 초과된 사용자에게 로그인을 허용, false 일 경우 초과된 사용자에게 로그인을 허용하지 않음. 초과된 사용자는 로그인 할 수 없게 된다.
-//                        .maxSessionsPreventsLogin(true)
-//                        // expiredUrl() : 세션 만료 시 보낼 페이지
-//                        .expiredUrl("/sessionExpired"));
 
 
 

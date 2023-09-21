@@ -35,7 +35,6 @@ public class ReplyService {
 
         ReplySave replySave = new ReplySave();
 
-//        Member member1 = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
         Member member = (Member) memberRepository.findByName(email).orElseThrow(()-> new IllegalArgumentException("이메일 찾을 수 없습니다."));
 
         Post post = postRepository.findById(postId).orElseThrow(PostNotFound::new);
@@ -46,52 +45,6 @@ public class ReplyService {
                 .member(member)
                 .post(post)
                 .build());
-
-
-        // 게시물 ID 가져오기
-//        Long postId = replyVo.getPost().getId();
-        // 게시물 검색
-//        Optional<Post> optionalPost = postRepository.findById(postId);
-
-        // 게시글 id
-//        Optional<Post> optionalPost =
-//                Optional.ofNullable(postRepository.findById(replyVo.getId()).orElseThrow(() -> {
-//                    return new IllegalArgumentException("아이디가 존재하지 않음");
-//                }));
-
-//        if (optionalPost.isPresent()) {
-//            // 게시글 id(Post_id)
-//            Post post = new Post();
-////            post.setId(replyVo.getId());
-//
-//            ReplyVo replyVo1 = new ReplyVo();
-//            replyVo1.setPost(post);
-//            replyVo1.setTitle(replyVo.getTitle());
-//            replyVo1.setContent(replyVo.getContent());
-//            replyVo1.setWriter(replyVo.getWriter());
-//
-//            return replyRepository.save(Reply.builder()
-//                    .title(replyVo1.getTitle())
-//                    .content(replyVo1.getContent())
-//                    .writer(replyVo1.getWriter())
-//                    .post(replyVo1.getPost())
-//                    .build());
-//
-////            Post post = optionalPost.get();
-//
-//            // Reply 엔티티 생성 및 저장
-////            Reply reply = Reply.builder()
-////                    .post(post)
-////                    .title(replyVo.getTitle())
-////                    .content(replyVo.getContent())
-////                    .writer(replyVo.getWriter())
-////                    .build();
-////
-////            return replyRepository.save(reply);
-//
-//        } else{
-//            throw new IllegalArgumentException("게시글이 존재하지 않음");
-//        }
 
         return reply;
     }
@@ -129,23 +82,6 @@ public class ReplyService {
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
 
-//        Reply reply = Reply.builder()
-//                .title(title)
-//                .content(content)
-//                .member(member)
-//                .writer(member.getName())
-//                .post(post)
-//                .build();
-//
-//        Long replyId = replyRepository.save(reply).getId();
-
-//        Reply reply1 = replyRepository.findByMemberIdAndPostId(memberId,postId);
-//
-//        if(reply1 == null){
-//            throw new ReplyNotFound();
-//
-//        }
-
         Reply reply = Reply.builder()
                 .id(replyId)
                 .content(content)
@@ -155,7 +91,6 @@ public class ReplyService {
                 .build();
 
 
-//        return replyRepository.save(reply);
         return replyRepository.save(reply);
 
     }
@@ -163,8 +98,6 @@ public class ReplyService {
 
     public Reply replyDelete(Long id) {
 
-//        Optional<Reply> optionalReply =
-//                Optional.ofNullable(replyRepository.findById(id).orElseThrow(ReplyNotFound::new));
         Reply reply = replyRepository.findById(id).orElseThrow(ReplyNotFound::new);
 
         replyRepository.delete(reply);

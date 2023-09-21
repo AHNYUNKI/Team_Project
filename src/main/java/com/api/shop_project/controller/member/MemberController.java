@@ -108,7 +108,6 @@ public class MemberController {
             model.addAttribute("member", memberdto);
             return "member/update";
         }
-//        return "redirect:/member/memberList";
         return "redirect:/member/login";
     }
 

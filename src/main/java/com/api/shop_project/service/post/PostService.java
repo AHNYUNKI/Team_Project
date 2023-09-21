@@ -49,13 +49,9 @@ public class PostService {
 
     @Transactional
     public Post postInsertDo(PostSave postSave,
-//                             String title,
-//                             String content,
-//                             String writer,
                              String email
                              ) {
 
-//        updateHit1(postSave);
 
         Member member =
                 (Member) memberRepository.findByName(email).orElseThrow(IllegalArgumentException::new);
@@ -101,7 +97,6 @@ public class PostService {
 
         Member member = (Member) memberRepository.findByName(email).orElseThrow(() -> new IllegalArgumentException("회원을 찾을 수 없습니다."));
 
-//        Post post = Post.toupdateOk(postVo);
 
         Post post = Post.builder()
                 .id(postSave.getId())
@@ -111,8 +106,6 @@ public class PostService {
                 .content(postSave.getContent())
                 .hit(postSave.getHit())
                 .build();
-//        Post post = Post.postsave(postSave.getId(), postSave.getTitle(),
-//                postSave.getContent(), postSave.getWriter(), member);
 
 
         Long postId = postRepository.save(post).getId();
@@ -155,20 +148,6 @@ public class PostService {
         List<PostSave> postSaves = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
 
-//        switch (subject) {
-//            case "id":
-//                Long searchId = Long.parseLong(search);
-//                posts = postRepository.findByIdContaining(searchId);
-//                break;
-//            case "title":
-//                posts = postRepository.findByTitleContaining(search);
-//                break;
-//            case "writer":
-//                posts = postRepository.findByWriterContaining(search);
-//                break;
-//            default:
-//                posts = postRepository.findAll();
-//        }
         if (subject.equals("content")) {
             posts = postRepository.findByContentContaining(search);
         } else if (subject.equals("title")) {
@@ -213,9 +192,6 @@ public class PostService {
 
     }
 
-//    public void updateHit(Long id){
-//        postRepository.updateHit(id);
-//    }
     private void updateHit1(PostSave postSave) {
         postRepository.updateHit1(postSave);
     }

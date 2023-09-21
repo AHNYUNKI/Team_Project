@@ -63,7 +63,6 @@ public class PostController {
 
 
         model.addAttribute("postList", postList);
-//            return "post/postList";
 
         return "post/postList";
 
@@ -76,16 +75,12 @@ public class PostController {
     public String postInsert() {
 
         return "post/postInsert";
-//      return "index";
     }
 
     // 글작성
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/postInsert")
     public String postInsertPost(@AuthenticationPrincipal MyUserDetails myUserDetails,
-//                                @RequestParam String title,
-//                                 @RequestParam String content,
-//                                 @RequestParam String writer,
                                  PostSave postSave,
                                  Model model) {
 
@@ -117,7 +112,6 @@ public class PostController {
 
 
         return "post/postDetail";
-//        return "index";
 
     }
 
@@ -131,7 +125,6 @@ public class PostController {
 
         if (rs == 1) {
             System.out.println("수정성공");
-//            model.addAttribute("postVo", postVo1);
 
             return "redirect:/post/postList";
         } else {
@@ -167,65 +160,6 @@ public class PostController {
         return "redirect:/post/postList";
 
     }
-
-    // 게시글 검색
-//    @GetMapping("/postSearch")
-//    public String postSearch(
-//            @RequestParam(value = "subject", required = false) String subject,
-//            @RequestParam(value = "search", required = false) String search,
-//            Model model) {
-//
-//        System.out.println(subject + " subject");
-//        System.out.println(search + " search");
-//
-//        List<PostSave> postSaves
-//                = postService.searchPostList(subject, search);
-//
-//        if (!postSaves.isEmpty()) {
-//            System.out.println("완료");
-//            model.addAttribute("postList", postSaves);
-//            return "post/postList";
-//        }
-//
-//        System.out.println("조회할 목록이 없다.");
-//        return "redirect:/post/postList";
-//
-//    }
-
-
-    //    @GetMapping("/pagingList")
-//    public String pagingList(@PageableDefault(page = 0, size = 10, sort = "id",
-//            direction = Sort.Direction.DESC)Pageable pageable, Model model){
-//
-//        Page<PostVo> postVos = postService.postPagingList(pageable);
-//
-//        Long totalCount = postVos.getTotalElements();
-//
-//        int pageSize = postVos.getSize();
-//
-//        int nowPage = postVos.getNumber();
-//        int totalPage = postVos.getTotalPages();
-//        int blockNum = 3;
-//
-//        int startPage=
-//                (int) ((Math.floor(nowPage/blockNum)*blockNum)+1 <= totalPage ? (Math.floor(nowPage/blockNum)*blockNum) : totalPage);
-//
-//        int endPage =
-//                (startPage + blockNum - 1 < totalPage ? startPage + blockNum - 1 : totalPage);
-//
-//
-//        for(int i = startPage; i <= endPage; i++){
-//            System.out.println(i+" , ");
-//        }
-//
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("endPage", endPage);
-//        model.addAttribute("postVo", postVos);
-//
-//
-//        return "post/postList";
-//    }
-
 
 }
 

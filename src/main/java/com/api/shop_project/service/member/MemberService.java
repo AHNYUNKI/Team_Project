@@ -24,26 +24,6 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-//    @Transactional
-//    public void memberInsert(MemberDto memberdto) {
-//
-//        Long memberId = memberRepository.save(Member.builder()
-//                .email(memberdto.getEmail())
-//                .password(passwordEncoder.encode(memberdto.getPassword()))
-//                .name(memberdto.getName())
-//                .address(Address.builder()
-//                        .City(memberdto.getAddress().getCity())
-//                        .street(memberdto.getAddress().getStreet())
-//                        .zipcode(memberdto.getAddress().getZipcode())
-//                        .build())
-//                .role(Role.USER)
-//                .build()).getId();
-//
-//        Member member1
-//                = memberRepository.findById(memberId).orElseThrow(() -> {
-//            throw new IllegalArgumentException("아이디가 없음.");
-//        });
-//    }
 
     @Transactional
     public void insertMember2(MemberDto memberDto) {
@@ -70,17 +50,6 @@ public class MemberService {
     }
 
 
-//        memberRepository.findById(memberId).orElseThrow(IllegalArgumentException::new);
-
-//        Member memberEntity
-//                = Member.toMemberEntity(memberDto, passwordEncoder);
-//
-//        Long memberId = memberRepository.save(memberEntity).getId();
-//
-//        Member memberEntity1
-//                = memberRepository.findById(memberId).orElseThrow(() -> {
-//            throw new IllegalArgumentException("아이디가 없습니다.");
-//        });
 
 
         public int memberDelete(Long id) {
@@ -92,7 +61,6 @@ public class MemberService {
 
             memberRepository.delete(optionalMember.get()); // 해당 id 삭제
 
-//    memberRepository.deleteId(optionalBoardEntity.get().getId());
             Optional<Member> optionalMember1
                     =  memberRepository.findById(id); // 해당 id 조회
             if(!optionalMember1.isPresent()){
@@ -128,16 +96,6 @@ public class MemberService {
                         .role(Role.USER)
                         .build();
 
-//        Member memberEntity=
-//                Member.builder()
-//                        .id(memberDto.getId())
-//                        .name(memberDto.getName())
-//                        .email(memberDto.getEmail())
-//                        .password(passwordEncoder.encode(memberDto.getPassword()))
-//                        .phone(memberDto.getPhone())
-//                        .address(memberDto.getAddress())
-//                        .role(Role.USER)
-//                        .build();
 
 
         Long memberId= memberRepository.save(memberEntity).getId();

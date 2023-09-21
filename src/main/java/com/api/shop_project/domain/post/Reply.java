@@ -20,9 +20,6 @@ public class Reply extends BaseTime {
     @Column(name = "reply_id")
     private Long id;
 
-//    @Column(nullable = false)
-//    private String title;
-
     @Column(nullable = true)
     private String content;
 

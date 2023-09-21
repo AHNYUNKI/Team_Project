@@ -28,7 +28,6 @@ public class ReplyController {
 
     @PostMapping("/write")
     public String replyWrite(@AuthenticationPrincipal MyUserDetails myUserDetails,
-//                            @RequestParam Long memberId,
                              @RequestParam Long postId,
                              @RequestParam String content){
 

@@ -53,8 +53,6 @@ public class CartService {
 
         cartFindOne.setMemberId(memberId);
 
-//        return cartRepository.cartFindOne(cartFindOne);
-
         List<CartResponse> cartResponses = cartRepository.cartFindOne(cartFindOne);
 
         return cartResponses;
