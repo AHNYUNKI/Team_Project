@@ -120,7 +120,7 @@ public class MemberController {
         model.addAttribute("member", member);
 
 
-        return "redirect:/index";
+        return "/member/oauth2add";
     }
 
     @PostMapping("/oauth2add")
