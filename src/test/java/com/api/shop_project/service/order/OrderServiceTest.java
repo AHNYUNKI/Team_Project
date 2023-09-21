@@ -7,9 +7,11 @@ import com.api.shop_project.domain.member.Role;
 import com.api.shop_project.domain.order.Order;
 import com.api.shop_project.dto.response.order.OrderSearch;
 import com.api.shop_project.repository.Item.ItemRepository;
+import com.api.shop_project.repository.cart.CartRepository;
 import com.api.shop_project.repository.member.MemberRepository;
 import com.api.shop_project.repository.order.OrderItemRepository;
 import com.api.shop_project.repository.order.OrderRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,12 +40,16 @@ class OrderServiceTest {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    @BeforeEach
+    @Autowired
+    private CartRepository cartRepository;
+
+    @AfterEach
     void clean() {
-        memberRepository.deleteAll();
+        cartRepository.deleteAll();
         itemRepository.deleteAll();
         orderRepository.deleteAll();
         orderItemRepository.deleteAll();
+        memberRepository.deleteAll();
     }
 
     @Test

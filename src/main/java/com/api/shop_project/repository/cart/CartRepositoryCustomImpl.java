@@ -61,25 +61,7 @@ public class CartRepositoryCustomImpl implements CartRepositoryCustom{
             cartResponse.setTotalPrice(tuple.get(cartItem.totalPrice.sum()));
             cartResponses.add(cartResponse);
         });
-
         return cartResponses;
-
-//        return query.select(cartItem)
-//                .from(cartItem)
-//                .join(cartItem.cart, cart)
-//                .join(cartItem.item, item)
-//                .where(cartIdLike((cartFindOne.getMemberId())))
-//                .limit(1000)
-//                .fetch();
-
-
-//        return query.select(cart)
-//                .from(cart)
-//                .join(cart.member, member)
-//                .where(cartIdLike(cartFindOne.getMemberId()))
-//                .limit(1000)
-//                .fetch();
-
     }
 
     private BooleanExpression cartIdLike(Long memberId) {

@@ -87,6 +87,9 @@ public class OrderService {
     }
 
 
+    /**
+     * 주문 조회
+     */
     public List<Order> findByOne(Long memberId) {
 
         OrderFindOne orderFindOne = new OrderFindOne();
@@ -94,9 +97,7 @@ public class OrderService {
         orderFindOne.setMemberId(memberId);
         orderFindOne.setOrderStatus(OrderStatus.ORDER);
 
-        List<Order> one = orderRepository.findOne(orderFindOne);
-
-        return one;
+        return orderRepository.findOne(orderFindOne);
 
     }
 }

@@ -42,7 +42,6 @@ public class OrderItem {
     // service에서 넘겨 받은 데이터를 토대로 OrderItem을 만들고, item 재고 수량을 줄였다.
     public static OrderItem createOrderItem(Item item, int price, int count, Order order) {
 
-        System.out.println("count => " + count);
         item.removeStock(count);
 
         return OrderItem.builder()

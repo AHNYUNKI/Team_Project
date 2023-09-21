@@ -10,6 +10,7 @@ import com.api.shop_project.repository.order.OrderItemRepository;
 import com.api.shop_project.repository.order.OrderRepository;
 import com.api.shop_project.service.cart.CartService;
 import com.api.shop_project.service.order.OrderService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,12 +50,14 @@ class CartControllerTest {
     @Autowired
     private CartService cartService;
 
-    @BeforeEach
+    @AfterEach
     void clean() {
+        cartRepository.deleteAll();
+        memberRepository.deleteAll();
         orderRepository.deleteAll();
         itemRepository.deleteAll();
-        cartRepository.deleteAll();
     }
+
 
     @Test
     @ShopMocUser

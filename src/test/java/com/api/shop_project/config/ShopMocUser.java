@@ -10,9 +10,9 @@ import java.lang.annotation.RetentionPolicy;
 @WithSecurityContext(factory = ShopMockSecurityContext.class)
 public @interface ShopMocUser {
 
-    String name() default "userA";
+    String name() default "ahnyunki";
 
-    String email() default "userA@gmail.com";
+    String email() default "ahnyunki@gmail.com";
 
     String password() default "1111";
 
