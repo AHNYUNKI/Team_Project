@@ -159,6 +159,7 @@ public class PostController {
 
     }
 
+    // 글삭제
     @GetMapping("/postDelete/{id}")
     public String postDelete(@PathVariable("id") Long id) {
 
