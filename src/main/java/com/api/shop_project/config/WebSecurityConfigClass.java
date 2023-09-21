@@ -75,7 +75,6 @@ public class WebSecurityConfigClass {
                             }
                         }
                 )
-//                .defaultSuccessUrl("/member/oauth2add")                 // 로그인 후
                 .failureUrl("/member/login")
                 .userInfoEndpoint()
                 .userService(myAuth2UserService())
