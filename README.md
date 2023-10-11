@@ -2,11 +2,11 @@
 
 
 ## 데이터베이스
-![image](https://github.com/AHNYUNKI/Team_Project/assets/121776373/64e229a6-ff33-4e96-95a5-b16a5df56466)
+![image](https://github.com/AHNYUNKI/Team_Project/assets/121776373/c0bbf344-4361-42fc-8656-1fd031991222)
+
 
 ## Skiis
-
-<img width="1596" alt="스크린샷 2023-10-11 오후 10 41 30" src="https://github.com/AHNYUNKI/Team_Project/assets/121776373/3b7724d5-5487-4f2d-9d19-a8bfb9f0b330">
+<img width="1588" alt="스크린샷 2023-10-11 오후 10 57 03" src="https://github.com/AHNYUNKI/Team_Project/assets/121776373/b081b2b1-b914-4caf-a09d-089a88065c11">
 
 ## 🪝 팀원
 <table>
